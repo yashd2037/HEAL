@@ -3,7 +3,9 @@
 {% load static %}
 
 {% block body %}
-    <p>Choose two survey topics from below to see how they relate to each other</p>
+    <br>
+    <h3>Choose two survey topics from below to see how they relate to each other</h3>
+    <br>
     <div class="container">
 		<form action="{% url 'topic' %}" method="post">
 			{% csrf_token %}
