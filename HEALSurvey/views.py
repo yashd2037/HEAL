@@ -13,3 +13,6 @@ def topic(request):
     context = {'form': form}
     return render(request, 'TopicPage.html', context)
 
+def iframetest(request):
+    return render(request, 'iFrameTest.html')
+

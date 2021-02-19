@@ -5,5 +5,6 @@ from HEALSurvey import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name="home"),
-    path('topic/', views.topic, name='topic')
+    path('topic/', views.topic, name='topic'),
+    path('iframetest/', views.iframetest, name='iframetest')
 ]
