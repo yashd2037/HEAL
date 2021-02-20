@@ -9,7 +9,10 @@ def topic(request):
     form = TopicForm(request.POST or None)
     if form.is_valid():
         form.save()
-        return redirect('')
+        return redirect('survey')
     context = {'form': form}
     return render(request, 'TopicPage.html', context)
+
+def survey(request):
+    return render(request, 'Survey.html')
 
