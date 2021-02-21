@@ -16,3 +16,7 @@ def topic(request):
 def survey(request):
     return render(request, 'Survey.html')
 
+def team(request):
+    return render(request, 'Team.html')
+
+
