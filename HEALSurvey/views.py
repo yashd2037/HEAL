@@ -16,3 +16,7 @@ def topic(request):
 def iframetest(request):
     return render(request, 'iFrameTest.html')
 
+def team(request):
+    return render(request, 'Team.html')
+
+
