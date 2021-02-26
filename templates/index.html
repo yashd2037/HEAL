@@ -5,7 +5,7 @@
 {% block body %}
 {% if question_list %}
     <ul>
-    {% for question in question_list %}
+    {% for question in question_list %} <!--Loops through all questions and displays them in a listed format-->
         <li><a href="{% url 'detail' question.id %}">{{ question.question_text }}</a></li>
     {% endfor %}
     </ul>

@@ -9,6 +9,25 @@ TOPIC_CHOICES = (
     ('Employment', 'Employment')
 )
 
+Yes_No_Question = (
+    ('Yes', 'Yes'),
+    ('No', 'No')
+)
+
+Familiar_Question = (
+    ('Not at all', 'Not at all'),
+    ('Somewhat', 'Somewhat'),
+    ('Familiar', 'Familiar'),
+    ('Very familiar', 'Very familiar')
+)
+
+Agree_Question = (
+    ('Strongly disagree', 'Strongly disagree'),
+    ('Disagree', 'Disagree'),
+    ('Agree', 'Agree'),
+    ('Strongly Agree', 'Strongly Agree')
+)
+
 
 class Topics(models.Model):
     topic = models.CharField("First Topic", max_length=15, blank=True, choices=TOPIC_CHOICES)
@@ -26,7 +45,7 @@ class Question(models.Model):
 
 
 class Choice(models.Model):
-    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)  # allows many choices to be assigned to a question
     choice_text = models.CharField(max_length=200)
 
     def __str__(self):
