@@ -3,26 +3,27 @@
 {% load static %}
 
 {% block body %}
-    <h2>Welcome to HEAL</h2>
     <div class="jumbotron jumbotron-fluid">
         <div class="container">
             <div class="row">
                 <h1 class="display-1">HEAL</h1>
             </div>
+            <hr>
             <div class="row">
-                <h2 class="display-2 text-muted">Health Equity Analytical Lens</h2>
+                <h3 class="display-4 text-muted">Health Equity Analytical Lens</h3>
             </div>
         </div>
     </div>
     <div>
         <p class="lead ml-5">Welcome to HEAL</p>
         <br>
-        <p class="ml-5">The Health Equity Analytical Lens is an interactive web-based assessment tool that encourages users to consider public health equity when creating policies, programs, and budgets. To eliminate inequalities in public health, communities must alter their decision-making practices to prioritize equity at every opportunity.</p>
+        <p class="ml-5">The Health Equity Analytical Lens is an interactive web-based assessment tool that encourages users to consider public health equity when creating policies, programs, and budgets.</p>
+        <p class="ml-5">To eliminate inequalities in public health, communities must alter their decision-making practices to prioritize equity at every opportunity.</p>
         <br>
         <p class="ml-5">The first step in analyzing policies and ideas is to gain an understanding of your community's health challenges. <br>
         <b>Click on the box below to continue to the health assessment section.</b></p>
         <div class="container">
-            <a href="{%url 'topic'%}"><button class="btn btn-primary">Continue</button></a>
+             <a class="btn btn-info btn-lg my-2 " href="{%url 'topic'%}" role="button"> Continue &raquo;</a>
 	    </div>
     </div>
 
