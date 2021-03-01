@@ -53,3 +53,8 @@ img{
     margin-top: 50px;
     padding: 50px;
 }
+
+video {
+  margin: auto;
+  display: block;
+}
