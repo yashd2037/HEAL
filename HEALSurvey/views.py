@@ -44,3 +44,6 @@ def results(request, question_id):  # returns http response for the results
 
 def vote(request, question_id):  # returns http response for the vote information
     return HttpResponse("You're voting on question %s." % question_id)
+
+def video(request):  # renders video page
+    return render(request, 'Video.html')
