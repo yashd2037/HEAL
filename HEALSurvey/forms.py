@@ -1,5 +1,5 @@
 from django import forms
-from .models import Topics
+from .models import Topics, Question
 
 
 class TopicForm(forms.ModelForm):
@@ -10,5 +10,5 @@ class TopicForm(forms.ModelForm):
 
 class QuestionForm(forms.ModelForm):
     class Meta:
-        model = Topics
+        model = Question
         fields = '__all__'

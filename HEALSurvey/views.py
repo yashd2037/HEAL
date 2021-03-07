@@ -10,10 +10,35 @@ def home(request):  # Renders home page
 
 def topic(request):  # Checks the validity of the form and saves if valid, otherwise it renders the topic page
     form = TopicForm(request.POST or None)
-    question = Question.objects.get(id=1)  # Gets question at id 1, temporary solution
-    if form.is_valid():  # Checks is form received proper input
-        form.save()
-        return render(request, 'Survey.html', {'question': question})  # Renders survey with current question
+    if request.method == 'POST':
+        if form.is_valid():  # Checks if form received is proper input
+            #  form.save()  #this may only be needed after user login is implemented
+            firstTopic = request.POST.get('topic')  # Gets submitted topic 1
+            secondTopic = request.POST.get('topic2')  # Gets submitted topic 2
+            if (firstTopic == 'Housing' and secondTopic == 'Transportation') or (
+                    secondTopic == 'Housing' and firstTopic == 'Transportation'):  # Checks which topics were selected
+                question = Question.objects.get(id=201)  # Gets question at specified id
+            elif (firstTopic == 'Housing' and secondTopic == 'Healthcare') or (
+                    secondTopic == 'Housing' and firstTopic == 'Healthcare'):
+                question = Question.objects.get(id=301)
+            elif (firstTopic == 'Healthy Food' and secondTopic == 'Healthcare') or (
+                    secondTopic == 'Healthy Food' and firstTopic == 'Healthcare'):
+                question = Question.objects.get(id=401)
+            elif (firstTopic == 'Transportation' and secondTopic == 'Healthcare') or (
+                    secondTopic == 'Transportation' and firstTopic == 'Healthcare'):
+                question = Question.objects.get(id=501)
+            elif (firstTopic == 'Employment' and secondTopic == 'Healthcare') or (
+                    secondTopic == 'Employment' and firstTopic == 'Healthcare'):
+                question = Question.objects.get(id=601)
+            elif (firstTopic == 'Employment' and secondTopic == 'Housing') or (
+                    secondTopic == 'Employment' and firstTopic == 'Housing'):
+                question = Question.objects.get(id=701)
+            elif (firstTopic == 'Employment' and secondTopic == 'Transportation') or (
+                    secondTopic == 'Employment' and firstTopic == 'Transportation'):
+                question = Question.objects.get(id=801)
+            else:
+                question = Question.objects.get(id=101)  # Gets question at id 101, temporary solution for invalid input
+            return render(request, 'Survey.html', {'question': question})  # Renders survey with current question
     return render(request, 'TopicPage.html', {'form': form})  # Re-renders the current page
 
 
