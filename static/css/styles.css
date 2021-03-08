@@ -5,6 +5,11 @@ p {
 
 .jumbotron {
     background: url("https://validatedlearning.co/wp-content/uploads/2017/08/green-geo-background-banner.jpeg");
+    border: 10px double lightseagreen;
+    margin-top: 5px;
+    background-size: cover;
+    padding-top: 0.5%;
+    padding-bottom: 0.5%;
 }
 
 body {
@@ -12,6 +17,40 @@ body {
     justify-content: center;
 }
 
-h1, h2{
-    font-family: Arial, Helvetica, sans-serif;
+
+h1, h2, h3{
+    font-family: American Typewriter, serif;
+    font-variant: small-caps;
+}
+
+#team{
+    text-align: center;
+    border: 3px solid paleturquoise;
+    margin: 60px 350px;
+    color: midnightblue;
+    width: 50%;
+}
+
+img{
+    height: 90%;
+    width: 80%;
+    margin: 10px 50px;
+    border: 3px solid paleturquoise;
+
+}
+
+.btn, input{
+    float: right;
+    font-family: American Typewriter, serif;
+}
+
+.question{
+    margin-top: 5px;
+    padding: 50px;
+}
+
+iframe {
+  margin-left: 512px;
+
+
 }
