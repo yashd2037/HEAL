@@ -3,12 +3,14 @@
 {% load static %}
 
 {% block body %}
-    <p>Choose two survey topics from below to see how they relate to each other</p>
+    <br>
+    <h3 class ="mt-5" style ="text-align: center"> Choose two survey topics from below to see how they relate to each other</h3>
+    <br>
     <div class="container">
-		<form action="{% url 'topic' %}" method="post">
+		<form action="{% url 'topic' %}" method="post"> <!--Accepts two topics as user input-->
 			{% csrf_token %}
 			{{ form|crispy }}
-			<button type="submit" class="btn btn-primary">Continue</button>
+			<button type="submit" class="btn btn-info btn-lg my-2">Continue &raquo;</button>
 		</form>
 	</div>
 {% endblock %}
