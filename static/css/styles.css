@@ -49,6 +49,9 @@ img{
     padding: 50px;
 }
 
-iframe {
-  margin-left: 512px;
+.responsive-iframe {
+  min-width: 640px;
+  min-height: 480px;
+  border: inset 4px deepskyblue;
 }
+
