@@ -9,23 +9,37 @@
     {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
     {% if question.WebsiteLink %} <!-- Checks if current question has a website link -->
-        <h1 class="ml-5"><a href="{{ question.WebsiteLink }}" target="_blank" rel="noopener noreferrer">Follow this link for more
+        <h1 class="ml-5"><a href="{{ question.WebsiteLink }}" target="_blank" rel="noopener noreferrer">Follow this link
+            for more
             information.</a></h1>
     {% endif %}
-    {% if question.VideoLink %} <!-- Checks if current question has a website link -->
-        <iframe width="640" height="480"
-                src="{{ question.VideoLink }}">
-        </iframe>
-    {% endif %}
 
-    <form action="{% url 'survey' question.id %}" method="post">
-        {% csrf_token %}
-        {% for choice in question.choice_set.all %}
-            <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
-            <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
-        {% endfor %}
-        <input class="mr-5 btn btn-info btn-lg my-2" type="submit" value="Submit">
+    <div class="row">
+        <div class="col-4">
+        </div>
+        <div class="col-4">
+            {% if question.VideoLink %} <!-- Checks if current question has a video link -->
+                <iframe class="responsive-iframe"
+                        src="{{ question.VideoLink }}" allowfullscreen>
+                </iframe>
+            {% endif %}
+        </div>
+        <div class="col-4">
+            {% if not question.VideoLink %}
+        <form action="{% url 'survey' question.id %}" method="post">
+            {% csrf_token %}
+            {% for choice in question.choice_set.all %}
+                <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
+                <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
+            {% endfor %}
+            <input class="mr-5 btn btn-info btn-lg my-2" type="submit" value="Submit">
+        </form>
+            {% else %}
+            <div class="container">
+             <a id ="back" class="btn btn-info" href="{%url 'topic'%}" role="button"> Back</a>
+        {% endif %}
+        </div>
 
-    </form>
+
 
 {% endblock %}
