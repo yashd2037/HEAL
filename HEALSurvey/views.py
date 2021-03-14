@@ -1,25 +1,74 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import TopicForm
-from .models import Topics
+from .forms import TopicForm, QuestionForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth import login, logout
 from django.http import HttpResponse
-from .models import Question
+from .models import Topics, Question
 
 
 def home(request):  # Renders home page
     return render(request, 'IntroPage.html')
 
+def login_view(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+            return redirect('home')
+    else:
+        form = AuthenticationForm()
+    return render(request, 'Login.html', {'form': form})
+
+
+def logout_view(request):
+    logout(request)
+    return redirect('home')
+
+
+def register_view(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('login')
+    else:
+        form = UserCreationForm()
+    return render(request, 'Register.html', {'form': form})
+
 
 def topic(request):  # Checks the validity of the form and saves if valid, otherwise it renders the topic page
     form = TopicForm(request.POST or None)
-    if form.is_valid():
-        form.save()
-        return redirect('survey')
-    context = {'form': form}
-    return render(request, 'TopicPage.html', context)
-
-
-def survey(request):  # renders survey page
-    return render(request, 'Survey.html')
+    if request.method == 'POST':
+        if form.is_valid():  # Checks if form received is proper input
+            #  form.save()  #this may only be needed after user login is implemented
+            firstTopic = request.POST.get('topic')  # Gets submitted topic 1
+            secondTopic = request.POST.get('topic2')  # Gets submitted topic 2
+            if (firstTopic == 'Housing' and secondTopic == 'Transportation') or (
+                    secondTopic == 'Housing' and firstTopic == 'Transportation'):  # Checks which topics were selected
+                question = Question.objects.get(id=201)  # Gets question at specified id
+            elif (firstTopic == 'Housing' and secondTopic == 'Healthcare') or (
+                    secondTopic == 'Housing' and firstTopic == 'Healthcare'):
+                question = Question.objects.get(id=301)
+            elif (firstTopic == 'Healthy Food' and secondTopic == 'Healthcare') or (
+                    secondTopic == 'Healthy Food' and firstTopic == 'Healthcare'):
+                question = Question.objects.get(id=401)
+            elif (firstTopic == 'Transportation' and secondTopic == 'Healthcare') or (
+                    secondTopic == 'Transportation' and firstTopic == 'Healthcare'):
+                question = Question.objects.get(id=501)
+            elif (firstTopic == 'Employment' and secondTopic == 'Healthcare') or (
+                    secondTopic == 'Employment' and firstTopic == 'Healthcare'):
+                question = Question.objects.get(id=601)
+            elif (firstTopic == 'Employment' and secondTopic == 'Housing') or (
+                    secondTopic == 'Employment' and firstTopic == 'Housing'):
+                question = Question.objects.get(id=701)
+            elif (firstTopic == 'Employment' and secondTopic == 'Transportation') or (
+                    secondTopic == 'Employment' and firstTopic == 'Transportation'):
+                question = Question.objects.get(id=801)
+            else:
+                question = Question.objects.get(id=101)  # Gets question at id 101, temporary solution for invalid input
+            return render(request, 'Survey.html', {'question': question})  # Renders survey with current question
+    return render(request, 'TopicPage.html', {'form': form})  # Re-renders the current page
 
 
 def team(request):  # renders team page
@@ -32,15 +81,14 @@ def index(request):  # renders a list of all questions in the database on index 
     return render(request, 'index.html', context)
 
 
-def detail(request, question_id):  # renders detail page with selected question object from database
-    question = get_object_or_404(Question, pk=question_id)
-    return render(request, 'detail.html', {'question': question})
+def survey(request, question_id):  # renders initial survey page with selected question object from database
+    baseQuestion = Question.objects.get(id=question_id)  # Gets the question at the current id
+    if request.method == 'POST':
+        question = Question.objects.get(id=baseQuestion.NextIDA)  # Gets the question at the next A branch ID
+        return render(request, 'Survey.html', {'question': question})
+    question = baseQuestion
+    return render(request, 'Survey.html', {'question': question})
 
 
-def results(request, question_id):  # returns http response for the results
-    response = "You're looking at the results of question %s."
-    return HttpResponse(response % question_id)
-
-
-def vote(request, question_id):  # returns http response for the vote information
-    return HttpResponse("You're voting on question %s." % question_id)
+def video(request):  # renders video page
+    return render(request, 'Video.html')
