@@ -24,8 +24,8 @@ QUESTION_CHOICES = (
 
 
 class Topics(models.Model):
-    topic = models.CharField("First Topic", max_length=15, blank=True, choices=TOPIC_CHOICES)
-    topic2 = models.CharField("Second Topic", max_length=15, blank=True, choices=TOPIC_CHOICES)
+    topic = models.CharField("First Topic", max_length=15, blank=True, null=True, choices=TOPIC_CHOICES)
+    topic2 = models.CharField("Second Topic", max_length=15, blank=True, null=True, choices=TOPIC_CHOICES)
 
     def __str__(self):
         return self.topic
@@ -38,9 +38,9 @@ class Question(models.Model):
     PreviousID = models.IntegerField(default=1)
     NextIDA = models.IntegerField(default=1)
     NextIDB = models.IntegerField(default=1)
-    VideoLink = models.CharField(max_length=200, blank=True, null=True)
-    WebsiteLink = models.CharField(max_length=200, blank=True, null=True)
-    WebsiteLinkAlt = models.CharField(max_length=200, blank=True, null=True)
+    VideoLink = models.CharField(max_length=600, blank=True, null=True)
+    WebsiteLink = models.CharField(max_length=600, blank=True, null=True)
+    WebsiteLinkAlt = models.CharField(max_length=600, blank=True, null=True)
 
     def __str__(self):
         return self.QuestionText
