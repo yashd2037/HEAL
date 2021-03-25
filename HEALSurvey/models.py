@@ -12,6 +12,8 @@ TOPIC_CHOICES = (
 QUESTION_CHOICES = (
     ('Yes', 'Yes'),
     ('No', 'No'),
+    ('True', 'True'),
+    ('False', 'False'),
     ('Strongly disagree', 'Strongly disagree'),
     ('Disagree', 'Disagree'),
     ('Agree', 'Agree'),
@@ -20,6 +22,7 @@ QUESTION_CHOICES = (
     ('Somewhat', 'Somewhat'),
     ('Familiar', 'Familiar'),
     ('Very familiar', 'Very familiar')
+
 )
 
 

@@ -26,20 +26,23 @@ h1, h2, h3{
 #team{
     text-align: center;
     border: 3px solid paleturquoise;
-    margin: 60px 350px;
-    color: midnightblue;
+    margin: 30px 350px;
     width: 50%;
+    background: palegoldenrod;
 }
 
 img{
-    height: 90%;
-    width: 80%;
-    margin: 10px 50px;
-    border: 3px solid paleturquoise;
+    height: 60%;
+    width: 60%;
 
 }
 
-.btn, input{
+#pic{
+    margin: 10px;
+    border: 3px solid paleturquoise;
+}
+
+.btn{
     float: right;
     font-family: American Typewriter, serif;
 }
@@ -47,6 +50,10 @@ img{
 .question{
     margin-top: 5px;
     padding: 50px;
+}
+
+#log{
+    width: 25%;
 }
 
 .responsive-iframe {
@@ -57,4 +64,12 @@ img{
 
 #back{
     margin-right: 125px;
+}
+
+#why{
+    text-align: center;
+    color: midnightblue;
+    margin-left: 350px;
+    text-decoration: underline;
+    width: 50%;
 }

@@ -99,10 +99,10 @@ def survey(request, question_id):  # renders initial survey page with selected q
             return render(request, 'Survey.html', {'question': question})  # renders page
 
         if (response == 'Yes') or (response == 'Agree') or (response == 'Strongly Agree') or (
-                response == 'Familiar') or (response == 'Very familiar'):
+                response == 'Familiar') or (response == 'Very familiar') or (response == 'True'):
             question = Question.objects.get(id=baseQuestion.NextIDB)  # Gets the question at the next positive branch ID
         elif (response == 'No') or (response == 'Disagree') or (response == 'Strongly Disagree') or (
-                response == 'Somewhat') or (response == 'Not at all'):
+                response == 'Somewhat') or (response == 'Not at all') or (response == 'False'):
             question = Question.objects.get(id=baseQuestion.NextIDA)  # Gets the question at the next negative branch ID
         else:
             question = baseQuestion  # Gets base question
