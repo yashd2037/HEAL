@@ -27,11 +27,25 @@
                     <a class="nav-link" href="{% url 'topic' %}">Survey</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Information</a>
+                    <a class="nav-link" href="{% url 'info' %}">About HEAL</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'team' %}">Meet the Team</a>
+                    <a class="nav-link" href="{% url 'team' %}">How It All Begin</a>
                 </li>
+
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout' %}">Logout {{user.username}}</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href={% url 'login' %}>Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href={% url 'register' %}>Register</a>
+                    </li>
+
+                {% endif %}
             </ul>
         </div>
     </nav>

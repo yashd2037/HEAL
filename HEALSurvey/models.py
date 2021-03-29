@@ -9,50 +9,41 @@ TOPIC_CHOICES = (
     ('Employment', 'Employment')
 )
 
-Yes_No_Question = (
+QUESTION_CHOICES = (
     ('Yes', 'Yes'),
-    ('No', 'No')
-)
-
-Familiar_Question = (
+    ('No', 'No'),
+    ('True', 'True'),
+    ('False', 'False'),
+    ('Strongly disagree', 'Strongly disagree'),
+    ('Disagree', 'Disagree'),
+    ('Agree', 'Agree'),
+    ('Strongly Agree', 'Strongly Agree'),
     ('Not at all', 'Not at all'),
     ('Somewhat', 'Somewhat'),
     ('Familiar', 'Familiar'),
     ('Very familiar', 'Very familiar')
-)
 
-Agree_Question = (
-    ('Strongly disagree', 'Strongly disagree'),
-    ('Disagree', 'Disagree'),
-    ('Agree', 'Agree'),
-    ('Strongly Agree', 'Strongly Agree')
-)
-
-Question_Types = (
-    ('Yes_No_Question', 'Yes_No_Question'),
-    ('Agree_Question', 'Agree_Question'),
-    ('Familiar_Question', 'Familiar_Question')
 )
 
 
 class Topics(models.Model):
-    topic = models.CharField("First Topic", max_length=15, blank=True, choices=TOPIC_CHOICES)
-    topic2 = models.CharField("Second Topic", max_length=15, blank=True, choices=TOPIC_CHOICES)
+    topic = models.CharField("First Topic", max_length=15, blank=True, null=True, choices=TOPIC_CHOICES)
+    topic2 = models.CharField("Second Topic", max_length=15, blank=True, null=True, choices=TOPIC_CHOICES)
 
     def __str__(self):
         return self.topic
 
 
 class Question(models.Model):
-    QuestionText = models.CharField(max_length=200)
+    QuestionText = models.CharField(max_length=600)
+    InfoText = models.CharField(max_length=600, blank=True, null=True)
     id = models.IntegerField(primary_key=True)
     PreviousID = models.IntegerField(default=1)
     NextIDA = models.IntegerField(default=1)
     NextIDB = models.IntegerField(default=1)
-    VideoLink = models.CharField(max_length=200, blank=True, null=True)
-    ImageLink = models.CharField(max_length=200, blank=True, null=True)
-    WebsiteLink = models.CharField(max_length=200, blank=True, null=True)
-    # type = models.CharField(max_length=100, choices=Question_Types)
+    VideoLink = models.CharField(max_length=600, blank=True, null=True)
+    WebsiteLink = models.CharField(max_length=600, blank=True, null=True)
+    WebsiteLinkAlt = models.CharField(max_length=600, blank=True, null=True)
 
     def __str__(self):
         return self.QuestionText
@@ -60,16 +51,7 @@ class Question(models.Model):
 
 class Choice(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)  # allows many choices to be assigned to a question
-    choice_text = models.CharField(max_length=200)
-    # if Question.type == 'Yes_No_Question':
-    #     for count in Yes_No_Question:
-    #         choice_text = Yes_No_Question[count]
-    # elif Question.type == 'Agree_Question':
-    #     for count in Agree_Question:
-    #         choice_text = Agree_Question[count]
-    # elif Question.type == 'Familiar_Question':
-    #     for count in Familiar_Question:
-    #         choice_text = Familiar_Question[count]
+    choice_text = models.CharField(max_length=20, blank=True, choices=QUESTION_CHOICES)
 
     def __str__(self):
         return self.choice_text
