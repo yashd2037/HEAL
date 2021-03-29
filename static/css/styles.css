@@ -38,6 +38,10 @@ h3{
     font-size: 20px;
 }
 
+#logo{
+    width: 100%
+}
+
 #team{
     text-align: center;
     border: 3px solid paleturquoise;
