@@ -114,3 +114,6 @@ def survey(request, question_id):  # renders initial survey page with selected q
 
 def video(request):  # renders video page
     return render(request, 'Video.html')
+
+def info(request): # renders info page
+    return render(request, 'info.html')

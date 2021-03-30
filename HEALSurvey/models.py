@@ -66,12 +66,19 @@ class SummaryStatement(models.Model):
         return self.summary_text_a
 
 
-class SummaryChoice(models.Model):
-    question = models.ForeignKey(Question, on_delete=models.CASCADE)
-    s_choice = models.CharField(max_length=1, blank=True)
+class UserChoices(models.Model):
+    Username = models.CharField(max_length=100, blank=True, null=True)
+    u_choice = models.CharField(max_length=100, blank=True)
 
     def __str__(self):
-        return self.s_choice
+        return self.username
+
+# class SummaryChoice(models.Model):
+#     question = models.ForeignKey(Question, on_delete=models.CASCADE)
+#    s_choice = models.CharField(max_length=1, blank=True)
+
+#    def __str__(self):
+#        return self.s_choice
 
 
 # class Report(models.Model):
