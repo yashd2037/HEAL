@@ -27,10 +27,10 @@
                     <a class="nav-link" href="{% url 'topic' %}">Survey</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Information</a>
+                    <a class="nav-link" href="{% url 'info' %}">About HEAL</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'team' %}">Meet the Team</a>
+                    <a class="nav-link" href="{% url 'team' %}">How It All Begin</a>
                 </li>
 
                 {% if user.is_authenticated %}
