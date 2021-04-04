@@ -23,21 +23,21 @@
                         src="{{ question.VideoLink }}" allowfullscreen>
                 </iframe>
             {% endif %}
-        </div>
-        <div class="col-4">
-            {% if not question.VideoLink %}
+         {% if not question.VideoLink %}
         <form action="{% url 'survey' question.id %}" method="post">
             {% csrf_token %}
             {% for choice in question.choice_set.all %}
                 <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
-                <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
+                <label for="choice{{ forloop.counter }}"> {{ choice.choice_text }}</label><br>
             {% endfor %}
             <input class="mr-5 btn btn-info btn-lg my-2" type="submit" value="Submit">
         </form>
-            {% else %}
-            <div class="container">
-             <a id ="back" class="btn btn-info" href="{%url 'topic'%}" role="button"> Back</a>
         {% endif %}
         </div>
+        <div class="col-4">
+
+        </div>
+
+
 
 {% endblock %}

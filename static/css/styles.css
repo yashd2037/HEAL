@@ -23,23 +23,45 @@ h1, h2, h3{
     font-variant: small-caps;
 }
 
+h3{
+    font-weight: bold;
+}
+#capLetter{
+    font-family: American Typewriter, serif;
+    font-weight: bold;
+    font-size: 40px;
+
+}
+
+#heal{
+    font-family: American Typewriter, serif;
+    font-size: 20px;
+}
+
+#logo{
+    width: 100%
+}
+
 #team{
     text-align: center;
     border: 3px solid paleturquoise;
-    margin: 60px 350px;
-    color: midnightblue;
+    margin: 30px 350px;
     width: 50%;
+    background: palegoldenrod;
 }
 
 img{
-    height: 90%;
-    width: 80%;
-    margin: 10px 50px;
-    border: 3px solid paleturquoise;
+    height: 60%;
+    width: 60%;
 
 }
 
-.btn, input{
+#pic{
+    margin: 10px;
+    border: 3px solid paleturquoise;
+}
+
+.btn{
     float: right;
     font-family: American Typewriter, serif;
 }
@@ -49,6 +71,10 @@ img{
     padding: 50px;
 }
 
+#log{
+    width: 25%;
+}
+
 .responsive-iframe {
   min-width: 640px;
   min-height: 480px;
@@ -56,6 +82,18 @@ img{
 }
 
 #back{
-    margin-top: 490px;
-    margin-bottom: 10px;
+    margin-right: 125px;
+}
+
+#why{
+    text-align: center;
+    color: midnightblue;
+    margin-left: 350px;
+    text-decoration: underline;
+    width: 50%;
+}
+
+#email{
+    text-decoration: underline;
+    text-color: orange;
 }
