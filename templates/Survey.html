@@ -34,9 +34,11 @@
         </form>
         {% endif %}
         </div>
+    {% if question.VideoLink %} <!-- Checks if current question has a video link -->
         <div class="col-4">
             <a id="report" class="btn btn-info mr-5 mt-5 " href="{%url 'results'%}" role="button"> SHOW ME MY REPORT &raquo;</a>
         </div>
+    {% endif %}
 
 
 
