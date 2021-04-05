@@ -117,3 +117,6 @@ def video(request):  # renders video page
 
 def info(request): # renders info page
     return render(request, 'info.html')
+
+def results(request): # renders info page
+    return render(request, 'Results.html')

@@ -12,6 +12,14 @@ p {
     padding-bottom: 0.5%;
 }
 
+#summary{
+    text-align: center;
+    border: 3px solid paleturquoise;
+    margin: 30px 350px;
+    background: palegoldenrod;
+    color: red;
+}
+
 body {
     background-color: #D9ECFC;
     justify-content: center;
