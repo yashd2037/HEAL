@@ -3,11 +3,14 @@ from .forms import TopicForm, ChoiceForm
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout
 from django.http import HttpResponse
-from .models import Topics, Question, Choice
+from django.views.generic import ListView, CreateView, UpdateView
+from django.urls import reverse_lazy
+from .models import Topics, Question, Choice, City, CityData, ZipCode
 
 
 def home(request):  # Renders home page
     return render(request, 'IntroPage.html')
+
 
 def login_view(request):
     if request.method == 'POST':
@@ -68,7 +71,7 @@ def topic(request):  # Checks the validity of the form and saves if valid, other
             elif ((firstTopic == 'Healthy Food' and secondTopic == 'Housing') or (
                     secondTopic == 'Healthy Food' and firstTopic == 'Housing')) or (
                     (firstTopic == 'Healthy Food' and secondTopic == 'Transportation') or (
-                        secondTopic == 'Healthy Food' and firstTopic == 'Transportation')):
+                    secondTopic == 'Healthy Food' and firstTopic == 'Transportation')):
                 question = Question.objects.get(id=101)  # Gets question at id 101, temporary solution for invalid input
             else:
                 return render(request, 'TopicPage.html', {'form': form})  # Re-renders the current page
@@ -114,3 +117,8 @@ def survey(request, question_id):  # renders initial survey page with selected q
 
 def video(request):  # renders video page
     return render(request, 'Video.html')
+
+
+class CityDataListView(ListView):
+    model = CityData
+    context_object_name = 'city data'
