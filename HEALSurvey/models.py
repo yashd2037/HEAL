@@ -14,7 +14,7 @@ QUESTION_CHOICES = (
     ('No', 'No'),
     ('True', 'True'),
     ('False', 'False'),
-    ('Strongly disagree', 'Strongly disagree'),
+    ('Strongly Disagree', 'Strongly Disagree'),
     ('Disagree', 'Disagree'),
     ('Agree', 'Agree'),
     ('Strongly Agree', 'Strongly Agree'),
@@ -67,11 +67,11 @@ class SummaryStatement(models.Model):
 
 
 class UserChoices(models.Model):
-    Username = models.CharField(max_length=100, blank=True, null=True)
+    username = models.OneToOneField(User, on_delete=models.CASCADE, blank=True, null=True)
     u_choice = models.CharField(max_length=100, blank=True)
 
     def __str__(self):
-        return self.username
+        return str(self.username)
 
 # class SummaryChoice(models.Model):
 #     question = models.ForeignKey(Question, on_delete=models.CASCADE)
