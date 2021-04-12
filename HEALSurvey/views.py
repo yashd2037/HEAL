@@ -3,7 +3,8 @@ from .forms import TopicForm, ChoiceForm
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout
 from django.http import HttpResponse
-from .models import Topics, Question, Choice
+from django.views import generic
+from .models import Topics, Question, Choice, Post
 
 
 def home(request):  # Renders home page
@@ -120,3 +121,11 @@ def info(request): # renders info page
 
 def results(request): # renders info page
     return render(request, 'Results.html')
+
+class PostList(generic.ListView):
+    queryset = Post.objects.filter(status=1).order_by('-created_on')
+    template_name = 'blog.html'
+
+class PostDetail(generic.DetailView):
+    model = Post
+    template_name = 'post_detail.html'
