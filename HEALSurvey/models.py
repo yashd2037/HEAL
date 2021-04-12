@@ -14,7 +14,7 @@ QUESTION_CHOICES = (
     ('No', 'No'),
     ('True', 'True'),
     ('False', 'False'),
-    ('Strongly Disagree', 'Strongly Disagree'),
+    ('Strongly disagree', 'Strongly disagree'),
     ('Disagree', 'Disagree'),
     ('Agree', 'Agree'),
     ('Strongly Agree', 'Strongly Agree'),
@@ -67,20 +67,56 @@ class SummaryStatement(models.Model):
 
 
 class UserChoices(models.Model):
-    username = models.OneToOneField(User, on_delete=models.CASCADE, blank=True, null=True)
+    Username = models.CharField(max_length=100, blank=True, null=True)
     u_choice = models.CharField(max_length=100, blank=True)
 
     def __str__(self):
-        return str(self.username)
+        return self.username
 
-# class SummaryChoice(models.Model):
+
+#
+# class SummaryStatement(models.Model):
 #     question = models.ForeignKey(Question, on_delete=models.CASCADE)
-#    s_choice = models.CharField(max_length=1, blank=True)
+#     summaryStatement = models.CharField(max_length=500)
+#
+#     def __str__(self):
+#         return self.summaryStatement
 
-#    def __str__(self):
-#        return self.s_choice
 
-
-# class Report(models.Model):
+# class FinalReport(models.Model):
 #     id = models.IntegerField(primary_key=True)
-#    schoice = models.ForeignKey(SummaryChoices, on_delete=models.CASCADE)
+
+
+# class FinalReportStatements(models.Model):
+#    report = models.ForeignKey(FinalReport, on_delete=models.CASCADE)
+#    statement = models.ForeignKey(SummaryStatement)
+#    s = []
+
+class City(models.Model):
+    name = models.CharField(max_length=30)
+
+    def __str__(self):
+        return self.name
+
+
+class ZipCode(models.Model):
+    city = models.ForeignKey(City, on_delete=models.CASCADE)
+    zipcode = models.CharField(max_length=30)
+
+    def __str__(self):
+        return self.zipcode, self.city
+
+
+class CityData(models.Model):
+    city = models.ForeignKey(City, on_delete=models.SET_NULL, null=True)
+    zipcode = models.ForeignKey(ZipCode, on_delete=models.SET_NULL, null=True)
+    medianFamilyIncome = models.CharField(max_length=30)
+    twoBedroomHousingWage = models.CharField(max_length=30)
+    prevalenceDiabetesInAdults = models.CharField(max_length=30)
+    walkScore = models.CharField(max_length=30)
+    housingTransportationAffordability = models.CharField(max_length=30)
+    healthyFoodAccess = models.CharField(max_length=30)
+    asthmaRate = models.CharField(max_length=30)
+
+    def __str__(self):
+        return self.medianFamilyIncome
