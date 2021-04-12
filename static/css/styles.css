@@ -50,20 +50,24 @@ h3{
     background: palegoldenrod;
 }
 
+#summary{
+    text-align: center;
+    border: 3px solid paleturquoise;
+    margin: 30px 350px;
+    background: palegoldenrod;
+    color: red;
+}
+
 img{
     height: 60%;
     width: 60%;
 
 }
 
-#pic{
-    margin: 10px;
-    border: 3px solid paleturquoise;
-}
 
 .btn{
     float: right;
-    font-family: American Typewriter, serif;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .question{
@@ -93,7 +97,16 @@ img{
     width: 50%;
 }
 
+.responsive {
+    margin: 10px;
+    border: 3px solid paleturquoise;
+    width: 100%;
+    height: auto;
+
+}
+
 #email{
     text-decoration: underline;
     text-color: orange;
 }
+
