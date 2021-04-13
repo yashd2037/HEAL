@@ -6,7 +6,9 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <meta charset="UTF-8"/>
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    {% block head %}
 
+    {% endblock %}
     <title>HEAL Survey</title>
 </head>
 <body>
@@ -31,6 +33,9 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'team' %}">How It All Began</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'blog' %}">Blog</a>
                 </li>
 
                 {% if user.is_authenticated %}
