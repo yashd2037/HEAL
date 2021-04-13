@@ -5,7 +5,8 @@ from django.contrib.auth import login, logout
 from django.http import HttpResponse
 from django.views.generic import ListView, CreateView, UpdateView
 from django.urls import reverse_lazy
-from .models import Topics, Question, Choice, SummaryStatement, UserChoices, City, CityData, ZipCode
+from django.views import generic
+from .models import Topics, Question, Choice, SummaryStatement, UserChoices, City, CityData, ZipCode, Post
 
 
 def home(request):  # Renders home page
@@ -273,3 +274,12 @@ def info(request):  # renders info page
 class CityDataListView(ListView):
     model = CityData
     context_object_name = 'city data'
+
+
+class PostList(generic.ListView):
+    queryset = Post.objects.filter(status=1).order_by('-created_on')
+    template_name = 'blog.html'
+
+class PostDetail(generic.DetailView):
+    model = Post
+    template_name = 'post_detail.html'

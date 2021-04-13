@@ -15,7 +15,6 @@ urlpatterns = [
     path('results/', views.results, name="results"),
     path('citydata/', views.CityDataListView.as_view(), name='CityData'),
     path('info/', views.info, name='info'),
-    path('video/', views.video, name='video'),
     path('blog/', views.PostList.as_view(), name='blog'),
     path('<slug:slug>/', views.PostDetail.as_view(), name='post_detail'),
 
