@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Question, Choice, City, ZipCode, CityData, SummaryStatement
+from .models import Question, Choice, City, ZipCode, CityData, SummaryStatement, UserChoices
 
 
 class ChoiceInline(admin.StackedInline):
@@ -22,3 +22,4 @@ admin.site.register(City)
 admin.site.register(ZipCode)
 admin.site.register(CityData)
 admin.site.register(SummaryStatement)
+admin.site.register(UserChoices)

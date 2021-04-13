@@ -3,7 +3,9 @@ from .forms import TopicForm, ChoiceForm, UserChoicesForm
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout
 from django.http import HttpResponse
-from .models import Topics, Question, Choice, SummaryStatement, UserChoices
+from django.views.generic import ListView, CreateView, UpdateView
+from django.urls import reverse_lazy
+from .models import Topics, Question, Choice, SummaryStatement, UserChoices, City, CityData, ZipCode
 
 
 def home(request):  # Renders home page
@@ -267,3 +269,7 @@ def results(request):
 
 def info(request):  # renders info page
     return render(request, 'info.html')
+
+class CityDataListView(ListView):
+    model = CityData
+    context_object_name = 'city data'
