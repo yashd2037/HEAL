@@ -44,8 +44,8 @@ def register_view(request):
 def topic(request):  # Checks the validity of the form and saves if valid, otherwise it renders the topic page
     form = TopicForm(request.POST or None)
     uform = UserChoicesForm(request.POST or None)
-    #  if UserChoices.objects.filter(username=request.user).exists():
-        #  UserChoices.objects.get(username=request.user).delete
+    if UserChoices.objects.filter(username=request.user).exists():
+        UserChoices.objects.filter(username=request.user).delete()
 
     if request.method == 'POST':
             firstTopic = request.POST.get('topic')  # Gets submitted topic 1
