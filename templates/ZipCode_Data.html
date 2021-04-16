@@ -1,0 +1,163 @@
+{% extends 'Base.html' %}
+{% block body %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Zip Code Data</title>
+  <script type="text/javascript">
+    function search_city() {
+        var input, table, tr, td, filter, i, display_data;
+        input = document.getElementById("city_search");
+        filter = input.value;
+        table = document.getElementById("zipcode_table");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+                display_data = td.innerText;
+                if (display_data.indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+
+            }
+        }
+    }
+
+
+    function search_zipcode(){
+        var input, table, tr, td, filter, i, display_data;
+        input = document.getElementById("zipcode_search");
+        filter = input.value;
+        table = document.getElementById("zipcode_table");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[1];
+            if (td) {
+                display_data = td.innerText;
+                if (display_data.indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+
+            }
+        }
+    }
+
+
+    function reset_table_data()
+    {
+        location.reload()
+    }
+  </script>
+</head>
+<body>
+    <center>
+        <h1>Zip Code Data</h1>
+        <hr/>
+        <select id="city_search" onclick="search_city();">
+            <option disabled="true" selected>-- Select City --</option>
+            <option value="Hartford">Hartford</option>
+            <option value="New Haven">New Haven</option>
+            <option value="Bridgeport">Bridgeport</option>
+            <option value="Norwalk">Norwalk</option>
+        </select>
+        <select id="zipcode_search" onclick="search_zipcode()">
+            <option disabled="true" selected>--Select Zip Code--</option>
+            {% for result in ZipCodeData %}
+                <option value="{{ result.zipcode.zipcode }}">{{ result.zipcode.zipcode }}</option>
+            {% endfor %}
+        </select>
+
+        <input type="button" value="Reset Table" onclick="reset_table_data();"/>
+        <hr/>
+        <table border=".5" id="zipcode_table">
+            <tr>
+                <th>City</th>
+                <th>Zip Code</th>
+                <th>Median Household Income</th>
+                <th>Two-Bedroom Housing Wage</th>
+                <th>Estimated Prevalence of Diabetes in Adults</th>
+                <th>Healthy Food Access</th>
+                <th>Adult Asthma Rates</th>
+                <th>High Blood Pressure</th>
+                <th>Heart Disease</th>
+                <th>Mental Health</th>
+                <th>Physical Health</th>
+                <th>Stroke</th>
+                <th>Lack of Health Insurance</th>
+            </tr>
+            {% for result in ZipCodeData %}
+            <tr>
+                <td>{{ result.city.name }}</td>
+                <td>{{ result.zipcode.zipcode }}</td>
+                <td>{{ result.median_household_income }}</td>
+                <td>{{ result.two_bedroom_housing_wage }}</td>
+                <td>{{ result.estimated_prevalence_of_diabetes_in_adults}}</td>
+                <td>{{ result.healthy_food_access }}</td>
+                <td>{{ result.adult_asthma_rates }}</td>
+                <td>{{ result.high_blood_pressure }}</td>
+                <td>{{ result.heart_disease }}</td>
+                <td>{{ result.mental_health }}</td>
+                <td>{{ result.physical_health }}</td>
+                <td>{{ result.stroke }}</td>
+                <td>{{ result.lack_of_health_insurance }}</td>
+            </tr>
+            {% endfor %}
+
+        </table>
+        <hr/>
+        <table border=".5">
+             <tr>
+                <th>City</th>
+                <th>Zip Code</th>
+                <th>Median Household Income</th>
+                <th>Two-Bedroom Housing Wage</th>
+                <th>Estimated Prevalence of Diabetes in Adults</th>
+                <th>Healthy Food Access</th>
+                <th>Adult Asthma Rates</th>
+                <th>High Blood Pressure</th>
+                <th>Heart Disease</th>
+                <th>Mental Health</th>
+                <th>Physical Health</th>
+                <th>Stroke</th>
+                <th>Lack of Health Insurance</th>
+            </tr>
+            <tr>
+                <td>Nationwide Average</td>
+                <td>-----</td>
+                <td>$62,843</td>
+                <td>$23.96</td>
+                <td>8.90%</td>
+                <td>----</td>
+                <td>7.70%</td>
+                <td>33.4%</td>
+                <td>3.90%</td>
+                <td>13.84%</td>
+                <td>26.19%</td>
+                <td>3.00%</td>
+                <td>9.20%</td>
+            </tr>
+            <tr>
+                <td>Statewide Average</td>
+                <td>-----</td>
+                <td>$78,444</td>
+                <td>$26.42</td>
+                <td>13.00%</td>
+                <td>----</td>
+                <td>9.20%</td>
+                <td>30.90%</td>
+                <td>3.80%</td>
+                <td>11.30%</td>
+                <td>23.50%</td>
+                <td>2.50%</td>
+                <td>5.90%</td>
+            </tr>
+        </table>
+    </center>
+</body>
+</html>
+{% endblock %}

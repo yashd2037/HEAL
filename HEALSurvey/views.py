@@ -6,7 +6,7 @@ from django.http import HttpResponse
 from django.views.generic import ListView, CreateView, UpdateView
 from django.urls import reverse_lazy
 from django.views import generic
-from .models import Topics, Question, Choice, SummaryStatement, UserChoices, City, CityData, ZipCode, Post
+from .models import Topics, Question, Choice, SummaryStatement, UserChoices, City, ZipCodeData, ZipCode, Post
 
 
 def home(request):  # Renders home page
@@ -44,50 +44,50 @@ def register_view(request):
 def topic(request):  # Checks the validity of the form and saves if valid, otherwise it renders the topic page
     form = TopicForm(request.POST or None)
     uform = UserChoicesForm(request.POST or None)
-    if UserChoices.objects.filter(username=request.user).exists():
-        UserChoices.objects.filter(username=request.user).delete()
+    #  if UserChoices.objects.filter(username=request.user).exists():
+    #  UserChoices.objects.get(username=request.user).delete
 
     if request.method == 'POST':
-            firstTopic = request.POST.get('topic')  # Gets submitted topic 1
-            secondTopic = request.POST.get('topic2')  # Gets submitted topic 2
-            if (firstTopic == 'Housing' and secondTopic == 'Transportation') or (
-                    secondTopic == 'Housing' and firstTopic == 'Transportation'):  # Checks which topics were selected
-                question = Question.objects.get(id=201)  # Gets question at specified id
-                UserChoices.objects.create(username=request.user, u_choice='2').save
-            elif (firstTopic == 'Housing' and secondTopic == 'Healthcare') or (
-                    secondTopic == 'Housing' and firstTopic == 'Healthcare'):
-                question = Question.objects.get(id=301)
-                UserChoices.objects.create(username=request.user, u_choice='3').save
-            elif (firstTopic == 'Healthy Food' and secondTopic == 'Healthcare') or (
-                    secondTopic == 'Healthy Food' and firstTopic == 'Healthcare'):
-                question = Question.objects.get(id=401)
-                UserChoices.objects.create(username=request.user, u_choice='4').save
-            elif (firstTopic == 'Transportation' and secondTopic == 'Healthcare') or (
-                    secondTopic == 'Transportation' and firstTopic == 'Healthcare'):
-                question = Question.objects.get(id=501)
-                UserChoices.objects.create(username=request.user, u_choice='5').save
-            elif (firstTopic == 'Employment' and secondTopic == 'Healthcare') or (
-                    secondTopic == 'Employment' and firstTopic == 'Healthcare'):
-                question = Question.objects.get(id=601)
-                UserChoices.objects.create(username=request.user, u_choice='6').save
-            elif (firstTopic == 'Employment' and secondTopic == 'Housing') or (
-                    secondTopic == 'Employment' and firstTopic == 'Housing'):
-                question = Question.objects.get(id=701)
-                UserChoices.objects.create(username=request.user, u_choice='7').save
-            elif (firstTopic == 'Employment' and secondTopic == 'Transportation') or (
-                    secondTopic == 'Employment' and firstTopic == 'Transportation'):
-                question = Question.objects.get(id=801)
-                UserChoices.objects.create(username=request.user, u_choice='8').save
-            elif ((firstTopic == 'Healthy Food' and secondTopic == 'Housing') or (
-                    secondTopic == 'Healthy Food' and firstTopic == 'Housing')) or (
-                    (firstTopic == 'Healthy Food' and secondTopic == 'Transportation') or (
-                        secondTopic == 'Healthy Food' and firstTopic == 'Transportation')):
-                question = Question.objects.get(id=101)  # Gets question at id 101, temporary solution for invalid input
-                UserChoices.objects.create(username=request.user, u_choice='1').save
-            else:
-                return render(request, 'TopicPage.html', {'form': form})  # Re-renders the current page
+        firstTopic = request.POST.get('topic')  # Gets submitted topic 1
+        secondTopic = request.POST.get('topic2')  # Gets submitted topic 2
+        if (firstTopic == 'Housing' and secondTopic == 'Transportation') or (
+                secondTopic == 'Housing' and firstTopic == 'Transportation'):  # Checks which topics were selected
+            question = Question.objects.get(id=201)  # Gets question at specified id
+            UserChoices.objects.create(username=request.user, u_choice='2').save
+        elif (firstTopic == 'Housing' and secondTopic == 'Healthcare') or (
+                secondTopic == 'Housing' and firstTopic == 'Healthcare'):
+            question = Question.objects.get(id=301)
+            UserChoices.objects.create(username=request.user, u_choice='3').save
+        elif (firstTopic == 'Healthy Food' and secondTopic == 'Healthcare') or (
+                secondTopic == 'Healthy Food' and firstTopic == 'Healthcare'):
+            question = Question.objects.get(id=401)
+            UserChoices.objects.create(username=request.user, u_choice='4').save
+        elif (firstTopic == 'Transportation' and secondTopic == 'Healthcare') or (
+                secondTopic == 'Transportation' and firstTopic == 'Healthcare'):
+            question = Question.objects.get(id=501)
+            UserChoices.objects.create(username=request.user, u_choice='5').save
+        elif (firstTopic == 'Employment' and secondTopic == 'Healthcare') or (
+                secondTopic == 'Employment' and firstTopic == 'Healthcare'):
+            question = Question.objects.get(id=601)
+            UserChoices.objects.create(username=request.user, u_choice='6').save
+        elif (firstTopic == 'Employment' and secondTopic == 'Housing') or (
+                secondTopic == 'Employment' and firstTopic == 'Housing'):
+            question = Question.objects.get(id=701)
+            UserChoices.objects.create(username=request.user, u_choice='7').save
+        elif (firstTopic == 'Employment' and secondTopic == 'Transportation') or (
+                secondTopic == 'Employment' and firstTopic == 'Transportation'):
+            question = Question.objects.get(id=801)
+            UserChoices.objects.create(username=request.user, u_choice='8').save
+        elif ((firstTopic == 'Healthy Food' and secondTopic == 'Housing') or (
+                secondTopic == 'Healthy Food' and firstTopic == 'Housing')) or (
+                (firstTopic == 'Healthy Food' and secondTopic == 'Transportation') or (
+                secondTopic == 'Healthy Food' and firstTopic == 'Transportation')):
+            question = Question.objects.get(id=101)  # Gets question at id 101, temporary solution for invalid input
+            UserChoices.objects.create(username=request.user, u_choice='1').save
+        else:
+            return render(request, 'TopicPage.html', {'form': form})  # Re-renders the current page
 
-            return render(request, 'Survey.html', {'question': question})  # Renders survey with current question
+        return render(request, 'Survey.html', {'question': question})  # Renders survey with current question
     return render(request, 'TopicPage.html', {'form': form})  # Re-renders the current page
 
 
@@ -271,15 +271,21 @@ def results(request):
 def info(request):  # renders info page
     return render(request, 'info.html')
 
-class CityDataListView(ListView):
-    model = CityData
-    context_object_name = 'city data'
-
 
 class PostList(generic.ListView):
     queryset = Post.objects.filter(status=1).order_by('-created_on')
     template_name = 'blog.html'
 
-class PostDetail(generic.DetailView):
-    model = Post
-    template_name = 'post_detail.html'
+
+#
+# class PostDetail(generic.DetailView):
+#     model = Post
+#     template_name = "post_detail.html"
+
+
+def zipcode_details(request):
+    result = ZipCodeData.objects.all
+    return render(request, 'ZipCode_Data.html', {"ZipCodeData": result})
+
+
+

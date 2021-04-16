@@ -86,7 +86,7 @@ class ZipCode(models.Model):
     zipcode = models.CharField(max_length=30)
 
     def __str__(self):
-        return self.zipcode, self.city
+        return self.city.name+ ' : ' + self.zipcode
 
 
 class CityData(models.Model):
@@ -102,6 +102,28 @@ class CityData(models.Model):
 
     def __str__(self):
         return self.medianFamilyIncome
+
+
+class ZipCodeData(models.Model):
+    city = models.ForeignKey(City, on_delete=models.SET_NULL, null=True)
+    zipcode = models.ForeignKey(ZipCode, on_delete=models.SET_NULL, null=True)
+    median_household_income = models.CharField(max_length=30)
+    two_bedroom_housing_wage = models.CharField(max_length=30)
+    estimated_prevalence_of_diabetes_in_adults = models.CharField(max_length=30)
+    healthy_food_access = models.CharField(max_length=30)
+    adult_asthma_rates = models.CharField(max_length=30)
+    high_blood_pressure = models.CharField(max_length=30)
+    heart_disease = models.CharField(max_length=30)
+    mental_health = models.CharField(max_length=30)
+    physical_health = models.CharField(max_length=30)
+    stroke = models.CharField(max_length=30)
+    lack_of_health_insurance = models.CharField(max_length=30)
+
+    class Meta:
+        db_table = 'HEALSurvey_zipcodedata'
+
+    def __str__(self):
+        return self.city.name + ' : ' + self.zipcode.zipcode
 
 
 STATUS = (

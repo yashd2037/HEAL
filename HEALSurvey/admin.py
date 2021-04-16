@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Question, Choice, City, ZipCode, CityData, SummaryStatement, UserChoices, Post
+from .models import Question, Choice, City, ZipCode, ZipCodeData, SummaryStatement, UserChoices, Post
 
 
 class ChoiceInline(admin.StackedInline):
@@ -15,7 +15,7 @@ class QuestionAdmin(admin.ModelAdmin):
 admin.site.register(Question, QuestionAdmin)
 admin.site.register(City)
 admin.site.register(ZipCode)
-admin.site.register(CityData)
+admin.site.register(ZipCodeData)
 admin.site.register(SummaryStatement)
 admin.site.register(UserChoices)
 
@@ -28,4 +28,3 @@ class PostAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Post, PostAdmin)
-

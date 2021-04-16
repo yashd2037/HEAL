@@ -13,10 +13,10 @@ urlpatterns = [
     path('logout/', views.logout_view, name="logout"),
     path('register/', views.register_view, name="register"),
     path('results/', views.results, name="results"),
-    path('citydata/', views.CityDataListView.as_view(), name='CityData'),
     path('info/', views.info, name='info'),
     path('blog/', views.PostList.as_view(), name='blog'),
-    path('<slug:slug>/', views.PostDetail.as_view(), name='post_detail'),
+#   path('<slug:slug>/', views.PostDetail.as_view(), name='post_detail'),
+    path('zipcode/', views.zipcode_details)
 
 
 ]
