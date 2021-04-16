@@ -110,3 +110,18 @@ img{
     text-color: orange;
 }
 
+#t{
+    border: 5px dotted orange;
+    background: deepskyblue;
+    color: palegoldenrod;
+}
+
+.site-heading{
+    text-align: center;
+}
+
+.card{
+    background: burlywood;
+    border: 3px solid deepskyblue;
+}
+
