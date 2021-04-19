@@ -15,8 +15,7 @@ urlpatterns = [
     path('results/', views.results, name="results"),
     path('info/', views.info, name='info'),
     path('blog/', views.PostList.as_view(), name='blog'),
-#    path('<slug:slug>/', views.PostDetail.as_view(), name='post_detail'),
-    path('zipcode/', views.zipcode_details)
-
+    path('zipcode/', views.zipcode_details, name='zipcode'),
+    path('<slug:slug>/', views.PostDetail.as_view(), name='post_detail')
 
 ]
