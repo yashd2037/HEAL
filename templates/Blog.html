@@ -1,0 +1,34 @@
+{% extends 'Base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block body %}
+<header class="masthead">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class=" col-md-8 col-md-10 mx-auto">
+                <div class="site-heading">
+                    <h1 id="t" class="site-heading my-4 mt-3"> HEAL's Blog </h1>
+                    <p class="lead">Stay updated with us!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="container">
+        <!-- Blog Entries Column -->
+        <div class="col-md mt-3 left">
+            {% for post in post_list %}
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h2 class="card-title" style ="color:darkred">{{ post.title }}</h2>
+                    <p class="card-text h6" style ="color:white">{{ post.author }} | {{ post.created_on}} </p>
+                    <p class="card-text">{{post.content|slice:":200" }}</p>
+                    <a href="{% url 'post_detail' post.slug  %}" class="btn btn-primary">Read More &rarr;</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+</div>
+{%endblock%}

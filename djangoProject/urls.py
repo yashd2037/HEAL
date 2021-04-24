@@ -12,8 +12,10 @@ urlpatterns = [
     path('login/', views.login_view, name="login"),
     path('logout/', views.logout_view, name="logout"),
     path('register/', views.register_view, name="register"),
-    path('video/', views.video, name='video'),
+    path('results/', views.results, name="results"),
     path('info/', views.info, name='info'),
-    path('results/', views.results, name='results')
+    path('blog/', views.PostList.as_view(), name='blog'),
+    path('zipcode/', views.zipcode_details, name='zipcode'),
+    path('<slug:slug>/', views.PostDetail.as_view(), name='post_detail')
 
 ]
