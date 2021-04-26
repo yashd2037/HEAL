@@ -23,15 +23,24 @@
                         src="{{ question.VideoLink }}" allowfullscreen>
                 </iframe>
             {% endif %}
-        <form action="{% url 'survey' question.id %}" method="post">
+
+
+        <form action="{% url 'survey' question.id xid %}" method="post">
             {% csrf_token %}
             {% for choice in question.choice_set.all %}
                 <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
                 <label for="choice{{ forloop.counter }}"> {{ choice.choice_text }}</label><br>
             {% endfor %}
+
             <input class="mr-5 btn btn-info btn-lg my-2" type="submit" value="Next &raquo;">
         </form>
-        </div>
 
+        <script>
+            function delhist(){
+                location.replace(document.referrer)
+            }
+        </script>
+
+        </div>
 
 {% endblock %}

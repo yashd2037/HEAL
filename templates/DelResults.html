@@ -1,0 +1,23 @@
+{% extends 'Base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block body %}
+    <div class="row justify-content-center">
+        <div class="col-12" id="summary"><h1> Summary</h1></div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-8"><p class="lead ml-5">
+        <p>Results: {{ upchoice }}</p>
+            {% for element in response_list %}
+                <p>{{ element }}</p>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="col-10"><p class="lead ml-5">
+        <a id="report" class="btn btn-info mr-2 mt-2" href="{% url 'account_page' %}" role="button">Go back</a>
+        <a id="report" class="btn btn-info mr-2 mt-2" href="{% url 'delete_rep' xid %}" role="button">Delete Report</a>
+        <a id="report" class="btn btn-info mr-2 mt-2" href="{% url 'home' %}" role="button">Return Home</a>
+    </div >
+
+{% endblock %}

@@ -67,7 +67,8 @@ class SummaryStatement(models.Model):
 
 
 class UserChoices(models.Model):
-    username = models.OneToOneField(User, on_delete=models.CASCADE, blank=True, null=True)
+    username = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+    u_id = models.IntegerField(default=0)
     u_choice = models.CharField(max_length=100, blank=True)
 
     def __str__(self):
