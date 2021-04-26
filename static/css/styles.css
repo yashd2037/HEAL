@@ -1,5 +1,5 @@
 p {
-    color:darkblue;
+    color: darkblue;
     font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -15,34 +15,40 @@ p {
 body {
     background-color: #D9ECFC;
     justify-content: center;
+    background-image: url("https://wallpaperaccess.com/full/185895.jpg");
+}
+
+.container-narrow {
+    background: url("https://www.aamhealthcare.com/wp-content/uploads/2015/04/AAM-healthcare-background1.png");
 }
 
 
-h1, h2, h3{
+h1, h2, h3 {
     font-family: American Typewriter, serif;
     font-variant: small-caps;
 }
 
-h3{
+h3 {
     font-weight: bold;
 }
-#capLetter{
+
+#capLetter {
     font-family: American Typewriter, serif;
     font-weight: bold;
     font-size: 40px;
 
 }
 
-#heal{
+#heal {
     font-family: American Typewriter, serif;
     font-size: 20px;
 }
 
-#logo{
+#logo {
     width: 100%
 }
 
-#team{
+#team {
     text-align: center;
     border: 3px solid paleturquoise;
     margin: 30px 350px;
@@ -50,7 +56,16 @@ h3{
     background: palegoldenrod;
 }
 
-#summary{
+#zipcode{
+    text-align: center;
+    border: 3px solid yellow;
+    margin: 30px 350px;
+    width: 50%;
+    background:white;
+
+}
+
+#summary {
     text-align: center;
     border: 3px solid paleturquoise;
     margin: 30px 350px;
@@ -58,38 +73,44 @@ h3{
     color: red;
 }
 
-img{
+img {
     height: 60%;
     width: 60%;
 
 }
 
 
-.btn{
+.btn {
     float: right;
     font-family: Arial, Helvetica, sans-serif;
 }
 
-.question{
+
+.question {
     margin-top: 5px;
     padding: 50px;
 }
 
-#log{
+#log {
     width: 25%;
 }
 
-.responsive-iframe {
-  min-width: 640px;
-  min-height: 480px;
-  border: inset 4px deepskyblue;
+#nav{
+    width: 10%;
+    border: inset 4px white;
 }
 
-#back{
+.responsive-iframe {
+    min-width: 640px;
+    min-height: 480px;
+    border: inset 4px deepskyblue;
+}
+
+#back {
     margin-right: 125px;
 }
 
-#why{
+#why {
     text-align: center;
     color: midnightblue;
     margin-left: 350px;
@@ -105,23 +126,80 @@ img{
 
 }
 
-#email{
+#email {
     text-decoration: underline;
-    text-color: orange;
+    color: orange;
 }
 
-#t{
+#t {
     border: 5px dotted orange;
     background: deepskyblue;
     color: palegoldenrod;
 }
 
-.site-heading{
+.site-heading {
     text-align: center;
 }
 
-.card{
+.card {
     background: burlywood;
     border: 3px solid deepskyblue;
 }
 
+#result {
+    background: white;
+    border: 5px groove yellow;
+
+}
+
+table, th, td {
+    border: 1px solid black;
+
+}
+
+tr:nth-child(even) {
+    background-color: palegoldenrod;
+}
+tr:nth-child(odd) {
+    background-color: burlywood;
+}
+
+tr:hover {
+    background-color: yellow;
+}
+
+th {
+    background-color: deepskyblue;
+    color: white;
+    height: 70px;
+}
+
+.fas {
+    position: relative;
+}
+
+.fas[title]:hover::after {
+    background: #333;
+    background: rgba(0, 0, 0, .8);
+    border-radius: 5px;
+    bottom: 26px;
+    color: #fff;
+    content: attr(title);
+    left: 20%;
+    padding: 5px 15px;
+    position: absolute;
+    z-index: 98;
+    width: 220px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.fas[title]:hover:before {
+    border: solid;
+    border-color: #333 transparent;
+    border-width: 6px 6px 0 6px;
+    bottom: 20px;
+    content: "";
+    left: 50%;
+    position: absolute;
+    z-index: 99;
+}

@@ -1,0 +1,238 @@
+{% extends 'Base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block head %}
+    <title>Zip Code Data</title>
+     <script type="text/javascript">
+            function search_city() {
+                var input, table, tr, td, filter, i, display_data;
+                input = document.getElementById("city_search");
+                filter = input.value;
+                table = document.getElementById("zipcode_table");
+                tr = table.getElementsByTagName("tr");
+                for (i = 0; i < tr.length; i++) {
+                    td = tr[i].getElementsByTagName("td")[0];
+                    if (td) {
+                        display_data = td.innerText;
+                        if (display_data.indexOf(filter) > -1) {
+                            tr[i].style.display = "";
+                        } else {
+                            tr[i].style.display = "none";
+                        }
+
+                    }
+                }
+            }
+
+
+            function search_zipcode(){
+                var input, table, tr, td, filter, i, display_data;
+                input = document.getElementById("search_input");
+                filter = input.value;
+                table = document.getElementById("zipcode_table");
+                tr = table.getElementsByTagName("tr");
+                for (i = 0; i < tr.length; i++) {
+                    td = tr[i].getElementsByTagName("td")[1];
+                    if (td) {
+                        display_data = td.innerText;
+                        if (display_data.indexOf(filter) > -1) {
+                            tr[i].style.display = "";
+                        } else {
+                            tr[i].style.display = "none";
+                        }
+
+                    }
+                }
+            }
+
+            function search_zipcode_dropdown(){
+                var input, table, tr, td, filter, i, display_data;
+                input = document.getElementById("zipcode_search");
+                filter = input.value;
+                table = document.getElementById("zipcode_table");
+                tr = table.getElementsByTagName("tr");
+                for (i = 0; i < tr.length; i++) {
+                    td = tr[i].getElementsByTagName("td")[1];
+                    if (td) {
+                        display_data = td.innerText;
+                        if (display_data.indexOf(filter) > -1) {
+                            tr[i].style.display = "";
+                        } else {
+                            tr[i].style.display = "none";
+                        }
+
+                    }
+                }
+            }
+
+
+            function reset_table_data()
+            {
+                location.reload()
+            }
+        </script>
+{% endblock %}
+
+
+{% block body %}
+     <div class="container">
+        <center>
+            <h1 id="zipcode">Zip Code Data</h1>
+            <hr/>
+            <select id="city_search" onclick="search_city();">
+                <option disabled="true" selected>-- Select City --</option>
+                {% for city_list in City %}
+                    <option value="{{ city_list.name }}">{{ city_list.name }}</option>
+                {% endfor %}
+            </select>
+            <select id="zipcode_search" onclick="search_zipcode_dropdown()">
+                <option disabled="true" selected>--Select Zip Code--</option>
+                {% for result in ZipCodeData %}
+                    <option value="{{ result.zipcode.zipcode }}">{{ result.city.name }} : {{ result.zipcode.zipcode }}</option>
+                {% endfor %}
+            </select>
+
+            <input id="search_input" type="text" onkeyup="search_zipcode()" placeholder="Enter Zip Code">
+
+            <input type="button" class="btn btn-warning" style="font-family: Arial, Helvetica, sans-serif;" value="Reset Table" onclick="reset_table_data();"/>
+            <hr/>
+            <table class="table" id="zipcode_table" >
+                <thread>
+                    <tr>
+                        <th>City</th>
+                        <th>Zip Code</th>
+                        <th>Median Household Income <i title="This includes the income of the householder and all other individuals 15 years old and over in the household." class="fas fa-info-circle"></i></th>
+                <th>Two-Bedroom Housing Wage <i title="Required to afford a 2 bedroom rental home." class="fas fa-info-circle"></i></th>
+                <th>Estimated Prevalence of Diabetes in Adults <i title="Respondents aged ≥18 years who report ever been told by a doctor, nurse, or other health professional that they have diabetes other than diabetes during pregnancy." class="fas fa-info-circle"></i></th>
+                <th>Healthy Food Access <i title="Indicates low or high access to healthy foods."  class="fas fa-info-circle"></i></th>
+                <th>Adult Asthma Rates <i title="Weighted number of respondents who answer “yes” both to both of the following questions: “Have you ever been told by a doctor, nurse, or other health professional that you have asthma?” and the question “Do you still have asthma?”" class="fas fa-info-circle"></i></th>
+                <th>High Blood Pressure <i title="Respondents aged ≥18 years who report ever having been told by a doctor, nurse, or other health professional that they have high blood pressure. Women who were told high blood pressure only during pregnancy and those who were told they had borderline hypertension were not included." class="fas fa-info-circle"></i></th>
+                <th>Heart Disease <i title="Respondents aged ≥18 years who report ever having been told by a doctor, nurse, or other health professional that they had angina or coronary heart disease." class="fas fa-info-circle"></i></th>
+                <th>Mental Health <i title="Respondents aged ≥18 years who report 14 or more days during the past 30 days during which their mental health was not good." class="fas fa-info-circle"></i></th>
+                <th>Physical Health <i title="Respondents aged ≥18 years who report 14 or more days during the past 30 days during which their physical health was not good." class="fas fa-info-circle"></i></th>
+                <th>Stroke <i title="Respondents aged ≥18 years who report ever having been told by a doctor, nurse, or other health professional that they have had a stroke." class="fas fa-info-circle"></i></th>
+                <th>Lack of Health Insurance <i title="Estimated prevalence of lack of health insurance among adults aged 18-64 years (%)" class="fas fa-info-circle"></i></th>
+
+                    </tr>
+                </thread>
+                <tbody>
+                {% for result in ZipCodeData %}
+                    <tr>
+                        <td>{{ result.city.name }}</td>
+                        <td>{{ result.zipcode.zipcode }}</td>
+                        <td>{{ result.median_household_income }}</td>
+                        <td>{{ result.two_bedroom_housing_wage }}</td>
+                        <td>{{ result.estimated_prevalence_of_diabetes_in_adults}}</td>
+                        <td>{{ result.healthy_food_access }}</td>
+                        <td>{{ result.adult_asthma_rates }}</td>
+                        <td>{{ result.high_blood_pressure }}</td>
+                        <td>{{ result.heart_disease }}</td>
+                        <td>{{ result.mental_health }}</td>
+                        <td>{{ result.physical_health }}</td>
+                        <td>{{ result.stroke }}</td>
+                        <td>{{ result.lack_of_health_insurance }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+
+            </table>
+            <hr/>
+            <table class="table">
+                <tr>
+                    <th>City</th>
+                    <th>Zip Code</th>
+                    <th>Median Household Income</th>
+                    <th>Two-Bedroom Housing Wage</th>
+                    <th>Estimated Prevalence of Diabetes in Adults</th>
+                    <th>Healthy Food Access</th>
+                    <th>Adult Asthma Rates</th>
+                    <th>High Blood Pressure</th>
+                    <th>Heart Disease</th>
+                    <th>Mental Health</th>
+                    <th>Physical Health</th>
+                    <th>Stroke</th>
+                    <th>Lack of Health Insurance</th>
+                </tr>
+                <tr>
+                    <td>Nationwide Average</td>
+                    <td>-----</td>
+                    <td>$62,843</td>
+                    <td>$23.96</td>
+                    <td>8.90%</td>
+                    <td>----</td>
+                    <td>7.70%</td>
+                    <td>33.4%</td>
+                    <td>3.90%</td>
+                    <td>13.84%</td>
+                    <td>26.19%</td>
+                    <td>3.00%</td>
+                    <td>9.20%</td>
+                </tr>
+                <tr>
+                    <td>Statewide Average</td>
+                    <td>-----</td>
+                    <td>$78,444</td>
+                    <td>$26.42</td>
+                    <td>13.00%</td>
+                    <td>----</td>
+                    <td>9.20%</td>
+                    <td>30.90%</td>
+                    <td>3.80%</td>
+                    <td>11.30%</td>
+                    <td>23.50%</td>
+                    <td>2.50%</td>
+                    <td>5.90%</td>
+                </tr>
+            </table>
+            <hr/>
+            <table class="table">
+                <tr>
+                    <th>City</th>
+                    <th>Zip Code</th>
+                    <th>Median Household Income</th>
+                    <th>Two-Bedroom Housing Wage</th>
+                    <th>Estimated Prevalence of Diabetes in Adults</th>
+                    <th>Healthy Food Access</th>
+                    <th>Adult Asthma Rates</th>
+                    <th>High Blood Pressure</th>
+                    <th>Heart Disease</th>
+                    <th>Mental Health</th>
+                    <th>Physical Health</th>
+                    <th>Stroke</th>
+                    <th>Lack of Health Insurance</th>
+                </tr>
+                <tr>
+                    <td>Nationwide Average</td>
+                    <td>-----</td>
+                    <td>$62,843</td>
+                    <td>$23.96</td>
+                    <td>8.90%</td>
+                    <td>----</td>
+                    <td>7.70%</td>
+                    <td>33.4%</td>
+                    <td>3.90%</td>
+                    <td>13.84%</td>
+                    <td>26.19%</td>
+                    <td>3.00%</td>
+                    <td>9.20%</td>
+                </tr>
+                <tr>
+                    <td>Statewide Average</td>
+                    <td>-----</td>
+                    <td>$78,444</td>
+                    <td>$26.42</td>
+                    <td>13.00%</td>
+                    <td>----</td>
+                    <td>9.20%</td>
+                    <td>30.90%</td>
+                    <td>3.80%</td>
+                    <td>11.30%</td>
+                    <td>23.50%</td>
+                    <td>2.50%</td>
+                    <td>5.90%</td>
+                </tr>
+            </table>
+        </center>
+    </div>
+{% endblock %}

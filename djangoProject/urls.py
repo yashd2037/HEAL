@@ -17,5 +17,7 @@ urlpatterns = [
     path('results/', views.results, name='results'),
     path('blog/', views.PostList.as_view(), name='blog'),
     path('<slug:slug>/', views.PostDetail.as_view(), name='post_detail'),
+    path('zipcode/', views.zipcode_details, name='zipcode')
+
 
 ]
