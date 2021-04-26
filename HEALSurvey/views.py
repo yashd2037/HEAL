@@ -465,8 +465,9 @@ class PostDetail(generic.DetailView):
 
 
 def zipcode_details(request):
-    result = ZipCodeData.objects.all
-    return render(request, 'ZipCode_Data.html', {"ZipCodeData": result})
+    result = ZipCodeData.objects.all()
+    city_list = City.objects.all()
+    return render(request, 'ZipCode_Data.html', {"ZipCodeData": result, "City": city_list})
 
 
 def account_page(request):
