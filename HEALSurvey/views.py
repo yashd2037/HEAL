@@ -138,8 +138,8 @@ def survey(request, question_id, xid):  # renders initial survey page with selec
             question = Question.objects.get(id=base_question.NextIDA)  # Goes to the next page if no choices
             if request.user.is_authenticated:
                 upchoice = upchoice + 'C'  # Updates user choices with a blank choice if authenticated
-            UserChoices.objects.filter(username=request.user, u_id=xid).update(u_choice=upchoice)
-            return render(request, 'Survey.html', {'question': question})  # renders page
+                UserChoices.objects.filter(username=request.user, u_id=xid).update(u_choice=upchoice)
+            return render(request, 'Survey.html', {'question': question, 'xid': xid})  # renders page
 
         if (response == 'Yes') or (response == 'Agree') or (response == 'Strongly Agree') or (
                 response == 'Familiar') or (response == 'Very familiar') or (response == 'True'):
