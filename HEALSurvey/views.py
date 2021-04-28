@@ -56,8 +56,7 @@ def topic(request):  # Checks the validity of the form and saves if valid, other
             else:  # if it doesnt exist
                 break
             if xid == 11:
-                return render(request, 'TopicPage.html', {'form': form})  # Re-renders the current page
-            # Need this to display an error message telling user to delete a response
+                return redirect('account_page')
 
     if request.method == 'POST':
         firstTopic = request.POST.get('topic')  # Gets submitted topic 1
