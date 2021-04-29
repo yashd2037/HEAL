@@ -41,27 +41,30 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'blog' %}">Blog</a>
                 </li>
-            <li class="nav-item">
+                <li class="nav-item">
                     <a class="nav-link" href="{% url 'zipcode' %}">Zipcode Data</a>
                 </li>
-
-                {% if user.is_authenticated %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'account_page' %}">{{user.username}}</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'logout' %}">Logout</a>
-                    </li>
-                {% else %}
-                    <li class="nav-item">
-                        <a class="nav-link" href={% url 'login' %}>Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href={% url 'register' %}>Register</a>
-                    </li>
-
-                {% endif %}
             </ul>
+                {% if user.is_authenticated %}
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link mr-auto" href="{% url 'account_page' %}">{{user.username}}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link mr-auto" href="{% url 'logout' %}">Logout</a>
+                        </li>
+                    </ul>
+                {% else %}
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link mr-auto" href={% url 'login' %}>Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link mr-auto" href={% url 'register' %}>Register</a>
+                        </li>
+                    </ul>
+                {% endif %}
+
         </div>
     </nav>
 </div>

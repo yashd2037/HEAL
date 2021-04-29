@@ -9,9 +9,11 @@
     <div class="row justify-content-center">
         <div id="result" class="col-8">
         <p class="lead ml-5">Results: {{ upchoice }}</p>
+        <ul>
             {% for element in response_list %}
-                <p class="lead">{{ element }}</p>
+                <li><p class="lead">{{ element }}</p></li>
             {% endfor %}
+        </ul>
         </div>
     </div>
     <div class="col-10"><p class="lead ml-5">

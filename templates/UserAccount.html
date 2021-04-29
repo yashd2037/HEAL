@@ -7,8 +7,8 @@
     <ul>
     {% for each in user_choice_list %}
         <li><a href="{% url 'del_results' forloop.counter %}">response {{ forloop.counter }}</a></li>
-        {% if forloop.counter == 10%}
-            <p>Your account is at the maximum amount of saved responses, please delete one if you want to make a new survey.</p>
+        {% if forloop.counter >= 10%}
+            <p class = "text-danger">Your account is at the maximum amount of saved responses, please delete one if you want to make a new survey.</p>
         {% endif %}
     {% endfor %}
     </ul>
