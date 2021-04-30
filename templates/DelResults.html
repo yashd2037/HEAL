@@ -8,7 +8,28 @@
     </div>
     <div class="row justify-content-center">
         <div id="result" class="col-8">
-        <p class="lead ml-5">Results: {{ upchoice }}</p>
+        {% if '1' in upchoice %}
+            <p class="lead text-center">Topic: Housing/Transportation + Healthy Food</p>
+        {% elif '2' in upchoice %}
+            <p class="lead text-center">Topic: Housing + Transportation</p>
+        {% elif '3' in upchoice %}
+            <p class="lead text-center">Topic: Housing + Healthcare</p>
+        {% elif '4' in upchoice %}
+            <p class="lead text-center">Topic: Healthcare + Healthy Food</p>
+        {% elif '5' in upchoice %}
+            <p class="lead text-center">Topic: Healthcare + Transportation</p>
+        {% elif '6' in upchoice %}
+            <p class="lead text-center">Topic: Healthcare + Employment</p>
+        {% elif '7' in upchoice %}
+            <p class="lead text-center">Topic: Housing + Employment</p>
+        {% elif '8' in upchoice %}
+            <p class="lead text-center">Topic: Employment + Transportation</p>
+        {% else %}
+
+        {% endif %}
+        <!--<p class="lead ml-5">Results: upchoice </p> -->
+        <p class="lead text-center">Here are some results based on your input throughout the survey:</p>
+        <br>
         <ul>
             {% for element in response_list %}
                 <li><p class="lead">{{ element }}</p></li>

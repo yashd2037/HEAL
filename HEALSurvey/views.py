@@ -45,6 +45,7 @@ def register_view(request):
 def topic(request):  # Checks the validity of the form and saves if valid, otherwise it renders the topic page
     form = TopicForm(request.POST or None)
     xid = 1
+
     if request.user.is_authenticated:
         for xid in range(1, 11):
             if UserChoices.objects.filter(username=request.user, u_id=xid).exists():  # checks choices at username + id
@@ -106,7 +107,6 @@ def topic(request):  # Checks the validity of the form and saves if valid, other
         else:  # if the topic chosen is invalid
             return render(request, 'TopicPage.html', {'form': form})  # Re-renders the current page
             # need this to display an error message telling user topic is invalid
-
         return render(request, 'Survey.html', {'question': question, 'xid': xid})  # Renders survey with current question
     return render(request, 'TopicPage.html', {'form': form})  # Re-renders the current page
 
