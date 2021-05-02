@@ -10,8 +10,16 @@
 
     {% if question.WebsiteLink %} <!-- Checks if current question has a website link -->
         <h1 class="ml-5"><a href="{{ question.WebsiteLink }}" target="_blank" rel="noopener noreferrer">Follow this link
-            for more
-            information.</a></h1>
+            for more information.</a></h1>
+    {% endif %}
+
+    {% if question.InfoText %}
+        <div class="question"><h1>{{ question.InfoText }}</h1></div>
+    {% endif %}
+
+    {% if question.WebsiteLinkAlt %} <!-- Checks if current question has a website link -->
+        <h1 class="ml-5"><a href="{{ question.WebsiteLinkAlt }}" target="_blank" rel="noopener noreferrer">Follow this link
+            for more information.</a></h1>
     {% endif %}
 
     <div class="row">
@@ -33,14 +41,16 @@
             {% endfor %}
 
             <input class="mr-5 btn btn-info btn-lg my-2" type="submit" value="Next &raquo;">
+            <a id="report" class="mr-2 btn btn-info btn-lg my-2" href="{% url 'home' %}" role="button">Cancel Survey</a>
         </form>
-
-        <script>
-            function delhist(){
-                location.replace(document.referrer)
-            }
-        </script>
-
         </div>
-
+    </div>
+    <div class="row">
+        <div class="col-3">
+        </div>
+        <div class="col-6">
+            <p class = "text-muted">Warning: Backtracking is not allowed in this survey as it may cause strange errors,
+                please do not use the browsers back button </p>
+        </div>
+    </div>
 {% endblock %}

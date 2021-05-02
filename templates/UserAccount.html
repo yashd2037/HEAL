@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block body %}
-    <p>Welcome {{user.get_username}}</p>
+    <p class="h1">Welcome {{user.get_username}}</p>
     <ul>
     {% for each in user_choice_list %}
         <li><a href="{% url 'del_results' forloop.counter %}">response {{ forloop.counter }}</a></li>
