@@ -3,6 +3,7 @@ from .forms import TopicForm, ChoiceForm, UserChoicesForm
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout
 from django.contrib.auth.models import User
+from django.contrib import messages
 from django.http import HttpResponse
 from django.views.generic import ListView, CreateView, UpdateView
 from django.urls import reverse_lazy
@@ -105,6 +106,7 @@ def topic(request):  # Checks the validity of the form and saves if valid, other
             if request.user.is_authenticated:
                 UserChoices.objects.create(username=request.user, u_choice='1', u_id=xid).save
         else:  # if the topic chosen is invalid
+            messages.warning(request, "No survey for chosen topics. Please choose different topics")
             return render(request, 'TopicPage.html', {'form': form})  # Re-renders the current page
             # need this to display an error message telling user topic is invalid
         return render(request, 'Survey.html', {'question': question, 'xid': xid})  # Renders survey with current question
