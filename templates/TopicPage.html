@@ -6,6 +6,13 @@
     <br>
     <h3 class ="mt-5" style ="text-align: center"> Choose two survey topics from below to see how they relate to each other</h3>
     <br>
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-warning" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
     <div class="container">
 		<form action="{% url 'topic' %}" method="post"> <!--Accepts two topics as user input-->
 			{% csrf_token %}
