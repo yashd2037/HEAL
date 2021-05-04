@@ -4,14 +4,15 @@
 
 {% block body %}
     <div class="row">
-        <div class="col-12 "><h1 id="team">How It All Begin</h1></div>
+        <div class="col-12 "><h1 id="team">How It All Began</h1></div>
     </div>
+    <div class ="con">
     <div class="row">
-        <h2 class="ml-5" id="why">My Why</h2>
+        <h2 id="why">My Why</h2>
     </div>
     <div class="row justify-content-center">
         <div class="col-3">
-            <img id="pic" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
+            <img id="admin" src="{% static 'images/Chris.jpg' %}" alt="Chris">
         </div>
         <div class="col-8"><p class="lead ml-5">
             In 2018, shortly after my 30 birthday, I suffered what the doctor’s determined to be a transient
@@ -39,6 +40,7 @@
 
             My goal is to transform communities so that all of our children can live better and healthier lives.</p>
         </div>
+    </div>
     </div>
 
 {% endblock %}

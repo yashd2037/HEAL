@@ -28,23 +28,18 @@
 
         {% endif %}
         <!--<p class="lead ml-5">Results: upchoice </p> -->
-        {% if user.is_authenticated %}
         <p class="lead text-center">Here are some results based on your input throughout the survey:</p>
-        <ul class="list-group">
+         <ul class="list-group">
             {% for element in response_list %}
                     <li class="list-group-item"><i class="fas fa-heart"></i> {{ element }}</li>
             {% endfor %}
         </ul>
-        {% else %}
-            <br>
-            <p class="lead text-center">Thank you for taking our survey, please login and take
-                another survey to get a customized summary statement!</p>
-
-        {% endif %}
         </div>
     </div>
     <div class="col-10"><p class="lead ml-5">
-        <a id="report" class="btn btn-info mr-2 mt-2" href="{% url 'home' %}" role="button">Return Home <i class="fas fa-home"></i></a>
+        <a id="report" class="btn btn-info mr-2 mt-2" href="{% url 'account_page' %}" role="button">Go back</a>
+        <a id="report" class="btn btn-info mr-2 mt-2" href="{% url 'delete_rep' xid %}" role="button">Delete Report</a>
+        <a id="report" class="btn btn-info mr-2 mt-2" href="{% url 'home' %}" role="button">Return Home</a>
     </div >
 
 {% endblock %}
