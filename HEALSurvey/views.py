@@ -1,20 +1,17 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from .forms import TopicForm, ChoiceForm, UserChoicesForm
+from django.shortcuts import render, redirect
+from .forms import TopicForm
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout
-from django.contrib.auth.models import User
-from django.http import HttpResponse
-from django.views.generic import ListView, CreateView, UpdateView
-from django.urls import reverse_lazy
+from django.views.generic import ListView
 from django.views import generic
-from .models import Topics, Question, Choice, SummaryStatement, UserChoices, City, CityData, ZipCodeData, ZipCode, Post
+from .models import Question, UserChoices, City, CityData, ZipCodeData, Post
 
 
 def home(request):  # Renders home page
     return render(request, 'IntroPage.html')
 
 
-def login_view(request):
+def login_view(request):  # Renders login page
     if request.method == 'POST':
         form = AuthenticationForm(data=request.POST)
         if form.is_valid():
@@ -26,12 +23,12 @@ def login_view(request):
     return render(request, 'Login.html', {'form': form})
 
 
-def logout_view(request):
+def logout_view(request):  # Logs user out and sends them to the home page.
     logout(request)
     return redirect('home')
 
 
-def register_view(request):
+def register_view(request):  # Renders register user page
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
@@ -47,16 +44,16 @@ def topic(request):  # Checks the validity of the form and saves if valid, other
     xid = 1
 
     if request.user.is_authenticated:
-        for xid in range(1, 11):
+        for xid in range(1, 11):  # loops through each set of current user's choices
             if UserChoices.objects.filter(username=request.user, u_id=xid).exists():  # checks choices at username + id
-                if 'D' in UserChoices.objects.get(username=request.user, u_id=xid).u_choice:
+                if 'D' in UserChoices.objects.get(username=request.user, u_id=xid).u_choice:  # D means choices are done
                     xid = xid + 1  # goes to next id
-                else:
-                    UserChoices.objects.filter(username=request.user, u_id=xid).delete()
+                else:  # if user choices are not complete
+                    UserChoices.objects.filter(username=request.user, u_id=xid).delete()  # delete those choices
                     break
             else:  # if it doesnt exist
                 break
-            if xid == 11:
+            if xid == 11:  # if there is 10 current user choices on current user's account
                 return redirect('account_page')
 
     if request.method == 'POST':
@@ -101,7 +98,7 @@ def topic(request):  # Checks the validity of the form and saves if valid, other
                 secondTopic == 'Healthy Food' and firstTopic == 'Housing')) or (
                 (firstTopic == 'Healthy Food' and secondTopic == 'Transportation') or (
                     secondTopic == 'Healthy Food' and firstTopic == 'Transportation')):
-            question = Question.objects.get(id=101)  # Gets question at id 101, temporary solution for invalid input
+            question = Question.objects.get(id=101)
             if request.user.is_authenticated:
                 UserChoices.objects.create(username=request.user, u_choice='1', u_id=xid).save
         else:  # if the topic chosen is invalid
@@ -115,19 +112,13 @@ def team(request):  # renders team page
     return render(request, 'Team.html')
 
 
-def index(request):  # renders a list of all questions in the database on index page
-    question_list = Question.objects.all()
-    context = {'question_list': question_list}
-    return render(request, 'index.html', context)
-
-
 def survey(request, question_id, xid):  # renders initial survey page with selected question object from database
     base_question = Question.objects.get(id=question_id)  # Gets the question at the current id
     if request.user.is_authenticated:
-        upchoice = UserChoices.objects.get(username=request.user, u_id=xid).u_choice
+        upchoice = UserChoices.objects.get(username=request.user, u_id=xid).u_choice  # gets current user's choices
     if request.method == 'POST':
-        if base_question.NextIDA == 1:
-            return results(request, xid)
+        if base_question.NextIDA == 1:  # if next id is 1
+            return results(request, xid)  # run results function
 
         if 'choice' in request.POST:  # Checks if there is a choice in the current request
             response = (base_question.choice_set.get(pk=request.POST['choice'])).choice_text  # sets choices text to var
@@ -137,16 +128,16 @@ def survey(request, question_id, xid):  # renders initial survey page with selec
             question = Question.objects.get(id=base_question.NextIDA)  # Goes to the next page if no choices
             if request.user.is_authenticated:
                 upchoice = upchoice + 'C'  # Updates user choices with a blank choice if authenticated
-                UserChoices.objects.filter(username=request.user, u_id=xid).update(u_choice=upchoice)
+                UserChoices.objects.filter(username=request.user, u_id=xid).update(u_choice=upchoice)  # updates choices
             return render(request, 'Survey.html', {'question': question, 'xid': xid})  # renders page
 
         if (response == 'Yes') or (response == 'Agree') or (response == 'Strongly Agree') or (
-                response == 'Familiar') or (response == 'Very familiar') or (response == 'True'):
+                response == 'Familiar') or (response == 'Very familiar') or (response == 'True'):  # if pos response
             question = Question.objects.get(id=base_question.NextIDB)  # Gets the question at the next B branch ID
             if request.user.is_authenticated:
                 upchoice = upchoice + 'B'  # Updates user choices with a positive choice if authenticated
         elif (response == 'No') or (response == 'Disagree') or (response == 'Strongly Disagree') or (
-                response == 'Somewhat') or (response == 'Not at all') or (response == 'False'):
+                response == 'Somewhat') or (response == 'Not at all') or (response == 'False'):  # if neg response
             question = Question.objects.get(id=base_question.NextIDA)  # Gets the question at the next A branch ID
             if request.user.is_authenticated:
                 upchoice = upchoice + 'A'  # Updates user choices with a blank choice if authenticated
@@ -154,13 +145,13 @@ def survey(request, question_id, xid):  # renders initial survey page with selec
             question = base_question  # Gets base question
 
         if request.user.is_authenticated:
-            UserChoices.objects.filter(username=request.user, u_id=xid).update(u_choice=upchoice)
+            UserChoices.objects.filter(username=request.user, u_id=xid).update(u_choice=upchoice)  # updates choices
         return render(request, 'Survey.html', {'question': question, 'xid': xid})  # Renders page with set question
     question = base_question  # Gets base question
     return render(request, 'Survey.html', {'question': question, 'xid': xid})  # Renders page with set question
 
 
-def results(request, xid):
+def results(request, xid):  # renders results page
     response_list = []  # creates a list for storing summary statements
     if request.user.is_authenticated:  # checks if user is logged in or not
         upchoice = UserChoices.objects.get(username=request.user, u_id=xid).u_choice  # Gets choices for current user
@@ -433,10 +424,11 @@ def del_results(request, xid):
 
     return render(request, 'DelResults.html', {'response_list': response_list, 'upchoice': upchoice, 'xid': xid})
 
-def delete_rep(request, xid):
-    UserChoices.objects.filter(username=request.user, u_id=xid).delete()
+
+def delete_rep(request, xid):  # deletes a report
+    UserChoices.objects.filter(username=request.user, u_id=xid).delete()  # Deletes current report
     x = 1
-    for x in range(1, 11):
+    for x in range(1, 11):  # loops through all choices
         if UserChoices.objects.filter(username=request.user, u_id=x).exists():  # checks choices at username + id
             if x > xid:
                 UserChoices.objects.filter(username=request.user, u_id=x).update(u_id=x-1)  # updates upchoice
@@ -469,15 +461,15 @@ def zipcode_details(request):
     return render(request, 'ZipCode_Data.html', {"ZipCodeData": result, "City": city_list})
 
 
-def account_page(request):
+def account_page(request):  # renders account page for current user
     user_choice_list = []
     xid = 1
-    for xid in range(1, 11):
-        if UserChoices.objects.filter(username=request.user, u_id=xid).exists():
-            if 'D' in UserChoices.objects.get(username=request.user, u_id=xid).u_choice:
-                user_choice_list.append(UserChoices.objects.get(username=request.user, u_id=xid).u_choice)
-            else:
-                UserChoices.objects.filter(username=request.user, u_id=xid).delete()
+    for xid in range(1, 11):  # loops through users saved reports
+        if UserChoices.objects.filter(username=request.user, u_id=xid).exists():  # if there is a report at this id
+            if 'D' in UserChoices.objects.get(username=request.user, u_id=xid).u_choice:  # if report is complete
+                user_choice_list.append(UserChoices.objects.get(username=request.user, u_id=xid).u_choice)  # adds line
+            else:  # if report in incomplete
+                UserChoices.objects.filter(username=request.user, u_id=xid).delete()  # delete report
         xid = xid + 1
 
     return render(request, 'UserAccount.html', {'user_choice_list': user_choice_list})
