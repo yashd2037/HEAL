@@ -4,35 +4,34 @@
 
 {% block body %}
     <div class="row justify-content-center">
-        <div class="col-12" id="summary"><h1> Summary</h1></div>
+        <div class="col-6" id="summary"><h1> Summary</h1></div>
     </div>
     <div class="row justify-content-center">
         <div id="result" class="col-8">
         {% if '1' in upchoice %}
-            <p class="lead text-center">Topic: Housing/Transportation + Healthy Food</p>
+            <h3 class ="mt-3" style="text-align: center">Topic: Housing/Transportation + Healthy Food</h3>
         {% elif '2' in upchoice %}
-            <p class="lead text-center">Topic: Housing + Transportation</p>
+            <h3 class ="mt-3" style="text-align: center">Topic: Housing + Transportation</h3>
         {% elif '3' in upchoice %}
-            <p class="lead text-center">Topic: Housing + Healthcare</p>
+            <h3 class ="mt-3" style="text-align: center">Topic: Housing + Healthcare</h3>
         {% elif '4' in upchoice %}
-            <p class="lead text-center">Topic: Healthcare + Healthy Food</p>
+            <h3 class ="mt-3" style="text-align: center">Topic: Healthcare + Healthy Food</h3>
         {% elif '5' in upchoice %}
-            <p class="lead text-center">Topic: Healthcare + Transportation</p>
+            <h3 class ="mt-3" style="text-align: center">Topic: Healthcare + Transportation</h3>
         {% elif '6' in upchoice %}
-            <p class="lead text-center">Topic: Healthcare + Employment</p>
+            <h3 class ="mt-3" style="text-align: center">Topic: Healthcare + Employment</h3>
         {% elif '7' in upchoice %}
-            <p class="lead text-center">Topic: Housing + Employment</p>
+            <h3 class ="mt-3" style="text-align: center">Topic: Housing + Employment</h3>
         {% elif '8' in upchoice %}
-            <p class="lead text-center">Topic: Employment + Transportation</p>
+            <h3 class ="mt-3" style="text-align: center">Topic: Employment + Transportation</h3>
         {% else %}
 
         {% endif %}
         <!--<p class="lead ml-5">Results: upchoice </p> -->
         <p class="lead text-center">Here are some results based on your input throughout the survey:</p>
-        <br>
-        <ul>
+         <ul class="list-group">
             {% for element in response_list %}
-                <li><p class="lead">{{ element }}</p></li>
+                    <li class="list-group-item"><i class="fas fa-heart"></i> {{ element }}</li>
             {% endfor %}
         </ul>
         </div>

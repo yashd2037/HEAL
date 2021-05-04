@@ -3,8 +3,10 @@
 {% load static %}
 
 {% block body %}
-    <p class="h1">Welcome {{user.get_username}}</p>
-    <ul>
+    <div class="box">
+    <h1>Welcome {{user.get_username}}</h1>
+    <br>
+    <ul id="res">
     {% for each in user_choice_list %}
         <li><a href="{% url 'del_results' forloop.counter %}">response {{ forloop.counter }}</a></li>
         {% if forloop.counter >= 10%}
@@ -12,5 +14,6 @@
         {% endif %}
     {% endfor %}
     </ul>
+    </div>
 
 {% endblock %}
