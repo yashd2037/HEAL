@@ -138,6 +138,11 @@ li a:hover {
     padding: 50px;
 }
 
+.i_question {
+    margin-top: 2px;
+    padding: 40px;
+}
+
 .responsive-iframe {
     min-width: 640px;
     min-height: 480px;
