@@ -3,6 +3,7 @@
 {% load static %}
 
 {% block body %}
+    {#    <body style ="background-image: url("i.pinimg.com/474x/2b/28/8e/2b288e2636a8909d600706982773210c.jpg");">#}
     <div class="jumbotron jumbotron-fluid">
         <div class="container">
             <div class="row">
@@ -14,17 +15,21 @@
             </div>
         </div>
     </div>
-    <div>
+    <div class="container-narrow">
         <p class="lead ml-5">Welcome to HEAL</p>
         <br>
-        <p class="ml-5">The Health Equity Analytical Lens is an interactive web-based assessment tool that encourages users to consider public health equity when creating policies, programs, and budgets.</p>
-        <p class="ml-5">To eliminate inequalities in public health, communities must alter their decision-making practices to prioritize equity at every opportunity.</p>
+        <p class="ml-5">The Health Equity Analytical Lens is an interactive web-based assessment tool that encourages
+            users to consider public health equity when creating policies, programs, and budgets.</p>
+        <p class="ml-5">To eliminate inequalities in public health, communities must alter their decision-making
+            practices to prioritize equity at every opportunity.</p>
         <br>
-        <p class="ml-5">The first step in analyzing policies and ideas is to gain an understanding of your community's health challenges. <br>
-        <b>Click on the box below to continue to the health assessment section.</b></p>
-        <div class="container">
-             <a class="btn btn-info btn-lg my-2 " href="{%url 'topic'%}" role="button"> Continue &raquo;</a>
-	    </div>
+        <p class="ml-5">The first step in analyzing policies and ideas is to gain an understanding of your community's
+            health challenges. <br>
+            <b>Click on the box below to continue to the health assessment section.</b></p>
     </div>
+    <div class="container">
+        <a class="btn btn-lg my-2 " href="{% url 'topic' %}" role="button"> <span>Continue </span></a>
+    </div>
+
 
 {% endblock %}

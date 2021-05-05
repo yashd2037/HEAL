@@ -3,6 +3,7 @@
 {% load static %}
 
 {% block body %}
+    <div class="con">
 
     <div class="question"><h1>{{ question.QuestionText }}</h1></div>
 
@@ -40,7 +41,7 @@
                 <label for="choice{{ forloop.counter }}"> {{ choice.choice_text }}</label><br>
             {% endfor %}
 
-            <input class="mr-5 btn btn-info btn-lg my-2" type="submit" value="Next &raquo;">
+            <input class="mr-5 btn btn-lg my-2" type="submit" value="Next">
             <a id="report" class="mr-2 btn btn-info btn-lg my-2" href="{% url 'home' %}" role="button">Cancel Survey</a>
         </form>
         </div>
@@ -52,5 +53,6 @@
             <p class = "text-muted">Warning: Backtracking is not allowed in this survey as it may cause strange errors,
                 please do not use the browsers back button </p>
         </div>
+    </div>
     </div>
 {% endblock %}

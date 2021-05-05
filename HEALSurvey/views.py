@@ -95,10 +95,13 @@ def topic(request):  # Checks the validity of the form and saves if valid, other
             question = Question.objects.get(id=801)
             if request.user.is_authenticated:
                 UserChoices.objects.create(username=request.user, u_choice='8', u_id=xid).save
-        elif ((firstTopic == 'Healthy Food' and secondTopic == 'Housing') or (
-                secondTopic == 'Healthy Food' and firstTopic == 'Housing')) or (
-                (firstTopic == 'Healthy Food' and secondTopic == 'Transportation') or (
-                    secondTopic == 'Healthy Food' and firstTopic == 'Transportation')):
+        elif (firstTopic == 'Healthy Food' and secondTopic == 'Transportation') or (
+                secondTopic == 'Healthy Food' and firstTopic == 'Transportation'):
+            question = Question.objects.get(id=901)
+            if request.user.is_authenticated:
+                UserChoices.objects.create(username=request.user, u_choice='9', u_id=xid).save
+        elif (firstTopic == 'Healthy Food' and secondTopic == 'Housing') or (
+                secondTopic == 'Healthy Food' and firstTopic == 'Housing'):
             question = Question.objects.get(id=101)
             if request.user.is_authenticated:
                 UserChoices.objects.create(username=request.user, u_choice='1', u_id=xid).save
@@ -268,9 +271,24 @@ def results(request, xid):  # renders results page
                     q_id = question.NextIDB
                 x = x + 1
 
-        else:
+        elif upchoice[0] == '8':
             q_id = 801
             while q_id < 899:
+                question = Question.objects.get(id=q_id)
+                if upchoice[x] == 'A':
+                    if question.summarystatement_set.exists():
+                        response_list.append(question.summarystatement_set.get().summary_text_a)
+                    q_id = question.NextIDA
+                elif upchoice[x] == 'B':
+                    if question.summarystatement_set.exists():
+                        response_list.append(question.summarystatement_set.get().summary_text_b)
+                    q_id = question.NextIDB
+                else:
+                    q_id = question.NextIDB
+                x = x + 1
+        else:
+            q_id = 901
+            while q_id < 999:
                 question = Question.objects.get(id=q_id)
                 if upchoice[x] == 'A':
                     if question.summarystatement_set.exists():
@@ -408,9 +426,24 @@ def del_results(request, xid):
                 q_id = question.NextIDB
             x = x + 1
 
-    else:
+    elif upchoice[0] == '8':
         q_id = 801
         while q_id < 899:
+            question = Question.objects.get(id=q_id)
+            if upchoice[x] == 'A':
+                if question.summarystatement_set.exists():
+                    response_list.append(question.summarystatement_set.get().summary_text_a)
+                q_id = question.NextIDA
+            elif upchoice[x] == 'B':
+                if question.summarystatement_set.exists():
+                    response_list.append(question.summarystatement_set.get().summary_text_b)
+                q_id = question.NextIDB
+            else:
+                q_id = question.NextIDB
+            x = x + 1
+    else:
+        q_id = 901
+        while q_id < 999:
             question = Question.objects.get(id=q_id)
             if upchoice[x] == 'A':
                 if question.summarystatement_set.exists():
