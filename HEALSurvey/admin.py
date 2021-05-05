@@ -5,7 +5,7 @@ from .models import Question, Choice, City, ZipCode, ZipCodeData, SummaryStateme
 
 class ChoiceInline(admin.StackedInline):
     model = Choice
-    extra = 4
+    extra = 0
 
 
 class SummaryStatementInline(admin.StackedInline):
@@ -36,8 +36,10 @@ admin.site.register(Question, QuestionAdmin)
 admin.site.register(City, CityAdmin)
 admin.site.register(ZipCode, ZipCodeAdmin)
 admin.site.register(ZipCodeData, ZipCodeDataAdmin)
-admin.site.register(SummaryStatement)
-admin.site.register(UserChoices)
+
+
+# admin.site.register(SummaryStatement)
+# admin.site.register(UserChoices)
 
 
 class PostAdmin(admin.ModelAdmin):
