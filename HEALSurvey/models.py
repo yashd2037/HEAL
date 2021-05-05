@@ -45,6 +45,10 @@ class Question(models.Model):
     WebsiteLink = models.CharField(max_length=600, blank=True, null=True)
     WebsiteLinkAlt = models.CharField(max_length=600, blank=True, null=True)
 
+    class Meta:
+        verbose_name = "Question"
+        verbose_name_plural = "Questions"
+
     def __str__(self):
         return self.QuestionText
 
@@ -62,6 +66,9 @@ class SummaryStatement(models.Model):
     summary_text_a = models.CharField(max_length=500, blank=True)
     summary_text_b = models.CharField(max_length=500, blank=True)
 
+    class Meta:
+        verbose_name = "Summary Statement"
+        verbose_name_plural = "Summary Statements"
     def __str__(self):
         return self.summary_text_a
 
@@ -71,12 +78,18 @@ class UserChoices(models.Model):
     u_id = models.IntegerField(default=0)
     u_choice = models.CharField(max_length=100, blank=True)
 
+    class Meta:
+        verbose_name_plural = "User Choices"
     def __str__(self):
         return str(self.username)
 
 
 class City(models.Model):
     name = models.CharField(max_length=30)
+
+    class Meta:
+        verbose_name = "City"
+        verbose_name_plural = "Cities"
 
     def __str__(self):
         return self.name
@@ -86,8 +99,12 @@ class ZipCode(models.Model):
     city = models.ForeignKey(City, on_delete=models.CASCADE)
     zipcode = models.CharField(max_length=30)
 
+    class Meta:
+        verbose_name = "Zip Code"
+        verbose_name_plural = "Zip Codes"
+
     def __str__(self):
-        return self.city.name+ ' : ' + self.zipcode
+        return self.city.name + ' : ' + self.zipcode
 
 
 class CityData(models.Model):
@@ -122,6 +139,7 @@ class ZipCodeData(models.Model):
 
     class Meta:
         db_table = 'HEALSurvey_zipcodedata'
+        verbose_name_plural = "Zip Code Data"
 
     def __str__(self):
         return self.city.name + ' : ' + self.zipcode.zipcode
@@ -136,14 +154,15 @@ STATUS = (
 class Post(models.Model):
     title = models.CharField(max_length=200, unique=True)
     slug = models.SlugField(max_length=200, unique=True)
-    author = models.ForeignKey(User, on_delete= models.CASCADE,related_name='blog_posts')
-    updated_on = models.DateTimeField(auto_now= True)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='blog_posts')
+    updated_on = models.DateTimeField(auto_now=True)
     content = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
     status = models.IntegerField(choices=STATUS, default=0)
 
     class Meta:
         ordering = ['-created_on']
+        verbose_name_plural = "Posts"
 
     def __str__(self):
         return self.title
