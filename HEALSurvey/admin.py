@@ -8,14 +8,34 @@ class ChoiceInline(admin.StackedInline):
     extra = 4
 
 
+class SummaryStatementInline(admin.StackedInline):
+    model = SummaryStatement
+    extra = 0
+
+
 class QuestionAdmin(admin.ModelAdmin):
-    inlines = [ChoiceInline]
+    inlines = [SummaryStatementInline, ChoiceInline]
+    search_fields = ['QuestionText']
+
+
+class CityAdmin(admin.ModelAdmin):
+    list_display = ['name']
+    search_fields = ['name']
+
+
+class ZipCodeAdmin(admin.ModelAdmin):
+    list_display = ['city', 'zipcode']
+    search_fields = ['zipcode']
+
+
+class ZipCodeDataAdmin(admin.ModelAdmin):
+    list_display = ['city', 'zipcode']
 
 
 admin.site.register(Question, QuestionAdmin)
-admin.site.register(City)
-admin.site.register(ZipCode)
-admin.site.register(ZipCodeData)
+admin.site.register(City, CityAdmin)
+admin.site.register(ZipCode, ZipCodeAdmin)
+admin.site.register(ZipCodeData, ZipCodeDataAdmin)
 admin.site.register(SummaryStatement)
 admin.site.register(UserChoices)
 

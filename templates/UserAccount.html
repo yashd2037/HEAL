@@ -8,7 +8,25 @@
     <br>
     <ul id="res">
     {% for each in user_choice_list %}
-        <li><a href="{% url 'del_results' forloop.counter %}">response {{ forloop.counter }}</a></li>
+        {% if '1' in each %}
+            <li><a href="{% url 'del_results' forloop.counter %}">Response {{ forloop.counter }} (Healthy Food + Housing)</a></li>
+        {% elif '2' in each%}
+            <li><a href="{% url 'del_results' forloop.counter %}">Response {{ forloop.counter }} (Housing + Transportation</a></li>
+        {% elif '3' in each%}
+            <li><a href="{% url 'del_results' forloop.counter %}">Response {{ forloop.counter }} (Housing + Healthcare)</a></li>
+        {% elif '4' in each%}
+            <li><a href="{% url 'del_results' forloop.counter %}">Response {{ forloop.counter }} (Healthy Food + Healthcare)</a></li>
+        {% elif '5' in each%}
+            <li><a href="{% url 'del_results' forloop.counter %}">Response {{ forloop.counter }} (Transportation + Healthcare)</a></li>
+        {% elif '6' in each%}
+            <li><a href="{% url 'del_results' forloop.counter %}">Response {{ forloop.counter }} (Employment + Healthcare)</a></li>
+        {% elif '7' in each%}
+            <li><a href="{% url 'del_results' forloop.counter %}">Response {{ forloop.counter }} (Employment+ Housing)</a></li>
+        {% elif '8' in each%}
+            <li><a href="{% url 'del_results' forloop.counter %}">Response {{ forloop.counter }} (Employment + Transportation)</a></li>
+        {% elif '9' in each%}
+            <li><a href="{% url 'del_results' forloop.counter %}">Response {{ forloop.counter }} (Healthy Food + Transportation)</a></li>
+        {% endif %}
         {% if forloop.counter >= 10%}
             <br>
             <p class = "text-danger">Your account is at the maximum amount of saved responses, please delete one if you want to make a new survey.</p>
